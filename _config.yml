@@ -44,6 +44,8 @@ social:
     # - https://www.facebook.com/username
     - https://www.linkedin.com/in/oshadha-samarakoon-488638341
 
+head_custom: includes/head-custom.html # custom head tag, optional
+# The default value is `includes/head.html`
 # Site Verification Settings
 webmaster_verifications:
   google: # fill in your Google verification code
