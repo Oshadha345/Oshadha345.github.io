@@ -23,7 +23,7 @@ When I'm not coding or researching, you'll find me diving into books, participat
   // ---------------------------------------------------------------------------
   // MEDIA
   // ---------------------------------------------------------------------------
-  avatar: "/images/avatars/avatar.png",
+  avatar: "/images/avatar.png",
   resumeUrl: "/resume.pdf",
   
   // ---------------------------------------------------------------------------
@@ -211,3 +211,5 @@ export const seoData = {
   ],
   twitterHandle: "@OshadhaSam",
 }
+
+
