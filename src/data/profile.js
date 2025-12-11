@@ -23,7 +23,7 @@ When I'm not coding or researching, you'll find me diving into books, participat
   // ---------------------------------------------------------------------------
   // MEDIA
   // ---------------------------------------------------------------------------
-  avatar: "/images/avatar.png",
+  avatar: "/images/avatars/avatar.png",
   resumeUrl: "/resume.pdf",
   
   // ---------------------------------------------------------------------------
