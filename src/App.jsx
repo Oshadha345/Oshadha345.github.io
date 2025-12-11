@@ -25,6 +25,7 @@ import Achievements from './pages/Achievements'
 import BookSunday from './pages/BookSunday'
 import BookDetail from './pages/BookDetail'
 
+
 // SEO Component
 import SEO from './components/common/SEO'
 
@@ -39,12 +40,12 @@ function App() {
       <SEO />
       
       {/* Main App Container with mesh gradient background */}
-      <div className="min-h-screen mesh-gradient">
+      <div className="relative flex flex-col min-h-screen w-full">
         {/* Navigation - Always visible */}
         <Navbar />
         
         {/* Main Content Area */}
-        <main>
+        <main className="flex-grow w-full">
           <Routes>
             {/* Home Page - Hero, Featured Projects, Blog Preview */}
             <Route path="/" element={<Home />} />
