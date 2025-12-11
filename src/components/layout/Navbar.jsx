@@ -29,6 +29,7 @@ const navLinks = [
   { name: 'Projects', path: '/projects' },
   { name: 'Achievements', path: '/achievements' },
   { name: 'Blog', path: '/blog' },
+  { name: '📚 Book Sunday', path: '/book-sunday' },
 ]
 
 // =============================================================================

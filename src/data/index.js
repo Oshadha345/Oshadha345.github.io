@@ -7,15 +7,21 @@
 //
 // =============================================================================
 
-// Profile & SEO Data
-export { profile, seoData } from './profile'
+// Profile, Education, Research & SEO Data
+export { 
+  profile, 
+  seoData, 
+  education, 
+  research 
+} from './profile'
 
 // Projects Data & Helpers
 export { 
-  projects, 
+  projects,
+  projectCategories,
   getFeaturedProjects, 
   getProjectById, 
-  getProjectsByStatus,
+  getProjectsByCategory,
   getAllTechStack 
 } from './projects'
 
@@ -26,13 +32,25 @@ export {
   getLatestBlogs,
   getFeaturedBlogs,
   getBlogBySlug,
-  getBlogById,
   getBlogsByCategory,
-  getBlogsByTag,
   getAllTags,
   getPopularBlogs,
-  searchBlogs
+  getBookSundayPosts
 } from './blogs'
+
+// Books Data & Helpers (Book Sunday)
+export {
+  books,
+  bookCategories,
+  getAllBooks,
+  getFeaturedBooks,
+  getBookBySlug,
+  getBooksByCategory,
+  getBooksByRating,
+  getAllBookTags,
+  getRecentBooks,
+  getBookStats
+} from './books'
 
 // Achievements Data & Helpers
 export { 
@@ -40,7 +58,5 @@ export {
   achievementTypes,
   getLatestAchievements,
   getAchievementsByType,
-  getAchievementById,
-  getCertifications,
-  getAwards
+  getAchievementsByYear
 } from './achievements'

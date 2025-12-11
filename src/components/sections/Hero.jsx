@@ -17,7 +17,7 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Download, ArrowRight, Github, Linkedin, Twitter, MapPin } from 'lucide-react'
+import { Download, ArrowRight, Github, Linkedin, Twitter, MapPin, ExternalLink } from 'lucide-react'
 import { profile } from '../../data'
 
 // ---------------------------------------------------------------------------
@@ -28,6 +28,7 @@ const socialIcons = {
   github: Github,
   linkedin: Linkedin,
   twitter: Twitter,
+  orcid: ExternalLink, // ORCID icon fallback
 }
 
 // =============================================================================
@@ -190,24 +191,44 @@ const Hero = () => {
               
               {/* Floating Skill Badges */}
               <div className="absolute -top-4 -right-4 glass-card px-4 py-2 rounded-full animate-float animation-delay-200">
-                <span className="text-sm font-medium text-blue-400">React</span>
+                <span className="text-sm font-medium text-blue-400">PyTorch</span>
               </div>
               
               <div className="absolute top-1/4 -left-8 glass-card px-4 py-2 rounded-full animate-float animation-delay-400">
-                <span className="text-sm font-medium text-purple-400">Node.js</span>
+                <span className="text-sm font-medium text-purple-400">Mamba/SSM</span>
               </div>
               
               <div className="absolute bottom-1/4 -right-8 glass-card px-4 py-2 rounded-full animate-float animation-delay-600">
-                <span className="text-sm font-medium text-green-400">TypeScript</span>
+                <span className="text-sm font-medium text-green-400">OpenCV</span>
               </div>
               
               <div className="absolute -bottom-4 left-1/4 glass-card px-4 py-2 rounded-full animate-float animation-delay-800">
-                <span className="text-sm font-medium text-pink-400">Tailwind</span>
+                <span className="text-sm font-medium text-pink-400">MATLAB</span>
+              </div>
+            </div>
+            
+            {/* Stats Grid */}
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="glass-card p-4 text-center">
+                <div className="text-2xl font-bold gradient-text">3.7</div>
+                <div className="text-gray-500 text-xs">GPA/4.0</div>
+              </div>
+              <div className="glass-card p-4 text-center">
+                <div className="text-2xl font-bold text-blue-400">98</div>
+                <div className="text-gray-500 text-xs">A/L National Rank</div>
+              </div>
+              <div className="glass-card p-4 text-center">
+                <div className="text-2xl font-bold text-purple-400">5+</div>
+                <div className="text-gray-500 text-xs">CP Finals</div>
+              </div>
+              <div className="glass-card p-4 text-center">
+                <div className="text-2xl font-bold text-green-400">2+</div>
+                <div className="text-gray-500 text-xs">Research Projects</div>
               </div>
             </div>
             
             {/* Skills Grid */}
-            <div className="mt-12 glass-card p-6 rounded-2xl">
+            <div className="mt-6 glass-card p-6 rounded-2xl">
               <h3 className="text-white font-semibold mb-4">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
                 {profile.skills.map((skill) => (

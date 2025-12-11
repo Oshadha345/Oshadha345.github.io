@@ -22,6 +22,8 @@ import ProjectDetail from './pages/ProjectDetail'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Achievements from './pages/Achievements'
+import BookSunday from './pages/BookSunday'
+import BookDetail from './pages/BookDetail'
 
 // SEO Component
 import SEO from './components/common/SEO'
@@ -54,6 +56,10 @@ function App() {
             {/* Blog Pages */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            
+            {/* Book Sunday - Reading Reflections */}
+            <Route path="/book-sunday" element={<BookSunday />} />
+            <Route path="/book-sunday/:slug" element={<BookDetail />} />
             
             {/* Achievements Page */}
             <Route path="/achievements" element={<Achievements />} />

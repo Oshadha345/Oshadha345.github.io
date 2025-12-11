@@ -1,479 +1,333 @@
 // =============================================================================
-// BLOGS DATA
+// BLOGS DATA - Oshadha Samarakoon
 // =============================================================================
-//
-// HOW TO ADD A NEW BLOG POST:
-// 1. Copy an existing blog object
-// 2. Generate a new unique ID 
-// 3. Create a URL-friendly slug (lowercase, hyphens instead of spaces)
-// 4. Fill in all the fields
-// 5. Add blog images to /public/images/blogs/ folder
-//
-// FIELDS EXPLAINED:
-// - id: Unique identifier
-// - slug: URL-friendly identifier (used in URLs: /blog/your-slug)
-// - title: Blog post title
-// - excerpt: Short preview text (shown on cards) - max 150 chars
-// - content: Full blog content (supports Markdown-like formatting)
-// - coverImage: Main blog image path
-// - author: Author name (usually your name)
-// - category: "tech" | "life" | "tutorials" | "other"
-// - tags: Array of relevant tags
-// - publishedAt: Publication date (ISO format)
-// - readTime: Estimated reading time in minutes
-// - featured: true/false - Featured posts appear in hero section
-// - likes: Initial like count (will be updated by users)
-// - comments: Array of comments (starts empty, users will add)
-//
-// CONTENT FORMATTING:
-// Use these markers in content for formatting:
-// ## Heading 2
-// ### Heading 3
-// **bold text**
-// *italic text*
-// `inline code`
-// ```language
-// code block
-// ```
-// - bullet point
-// 1. numbered list
-// [link text](url)
-// ![image alt](image-url)
+// 
+// This file contains blog posts (tech, research, life, tutorials)
+// Book Sunday has its own separate data file: books.js
 //
 // =============================================================================
 
 export const blogs = [
+  // ---------------------------------------------------------------------------
+  // RESEARCH & TECHNICAL BLOGS
+  // ---------------------------------------------------------------------------
   {
     id: 1,
-    slug: "getting-started-with-react-hooks",
-    title: "Getting Started with React Hooks: A Complete Guide",
-    excerpt: "Learn the fundamentals of React Hooks and how they can simplify your component logic and state management.",
-    content: `
-## Introduction
+    slug: "understanding-mamba-state-space-models",
+    title: "Understanding Mamba: State-Space Models for Sequence Modeling",
+    excerpt: "A deep dive into the Mamba architecture and why state-space models are revolutionizing how we process sequences.",
+    content: `## Introduction to Mamba
 
-React Hooks revolutionized the way we write React components. Introduced in React 16.8, hooks allow you to use state and other React features without writing a class.
+Transformers have dominated deep learning for years, but they come with a significant limitation: quadratic complexity with sequence length. Enter **Mamba** and State-Space Models (SSMs).
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+### The Problem with Transformers
 
-## Why Use Hooks?
-
-Hooks solve several problems that developers faced with class components:
-
-- **Reusable Logic**: Custom hooks allow you to extract component logic into reusable functions
-- **Simplified Code**: No more dealing with 'this' keyword confusion
-- **Better Organization**: Related code stays together instead of being split across lifecycle methods
-
-## The useState Hook
-
-The \`useState\` hook is the most basic hook. It allows you to add state to functional components.
-
-\`\`\`javascript
-import { useState } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
-  
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      Count: {count}
-    </button>
-  );
-}
+\`\`\`
+Attention Complexity: O(n²)
+For a sequence of length 10,000: 100,000,000 operations!
 \`\`\`
 
-## The useEffect Hook
+This makes long-sequence modeling computationally expensive and memory-intensive.
 
-The \`useEffect\` hook handles side effects in your components. It combines \`componentDidMount\`, \`componentDidUpdate\`, and \`componentWillUnmount\` into a single API.
+### State-Space Models: The Alternative
 
-\`\`\`javascript
-import { useState, useEffect } from 'react';
+SSMs are inspired by continuous-time dynamical systems:
 
-function DataFetcher() {
-  const [data, setData] = useState(null);
-  
-  useEffect(() => {
-    fetch('/api/data')
-      .then(res => res.json())
-      .then(setData);
-  }, []); // Empty dependency array = run once on mount
-  
-  return <div>{data ? data.message : 'Loading...'}</div>;
-}
+\`\`\`
+h'(t) = Ah(t) + Bx(t)
+y(t) = Ch(t) + Dx(t)
 \`\`\`
 
-## Custom Hooks
+Where:
+- **A**: State transition matrix
+- **B**: Input projection
+- **C**: Output projection
+- **h(t)**: Hidden state
 
-One of the most powerful features of hooks is the ability to create your own custom hooks.
+### Why Mamba is Special
 
-\`\`\`javascript
-function useLocalStorage(key, initialValue) {
-  const [value, setValue] = useState(() => {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : initialValue;
-  });
-  
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-  
-  return [value, setValue];
-}
-\`\`\`
+Mamba introduces **selective state spaces**—the ability to dynamically adjust how information is retained or forgotten based on input content.
 
-## Conclusion
+Key innovations:
+1. **Selective Scan**: Input-dependent state transitions
+2. **Hardware-Aware Algorithm**: Optimized for modern GPUs
+3. **Linear Complexity**: O(n) instead of O(n²)
 
-Hooks are now the recommended way to write React components. They provide a cleaner, more intuitive API for managing state and side effects.
+### Applications in My Research
 
-Start using hooks in your projects today and experience the benefits of cleaner, more maintainable code!
-    `,
-    coverImage: "/images/blogs/react-hooks.jpg",
-    author: "Your Name",
+At MARC, we're applying Mamba to:
+- **Solar Irradiance Forecasting**: Time-series prediction with long sequences
+- **Remote Sensing**: Efficient processing of satellite imagery sequences
+
+### Conclusion
+
+State-space models represent a paradigm shift in sequence modeling. While Transformers excel in many tasks, SSMs like Mamba offer compelling advantages for long-sequence applications.
+
+*Stay curious. The architecture landscape is evolving rapidly.*`,
+    coverImage: "/images/blogs/mamba-ssm.jpg",
+    author: "Oshadha Samarakoon",
     category: "tech",
-    tags: ["React", "JavaScript", "Hooks", "Frontend"],
-    publishedAt: "2024-08-15",
+    tags: ["deep-learning", "mamba", "state-space-models", "transformers", "AI"],
+    publishedAt: "2025-11-15",
     readTime: 8,
     featured: true,
-    likes: 142,
-    comments: [
-      {
-        id: 1,
-        author: "Jane Developer",
-        avatar: "/images/avatars/default.jpg",
-        content: "Great article! Really helped me understand useEffect better.",
-        date: "2024-08-16",
-        likes: 12,
-      },
-      {
-        id: 2,
-        author: "Code Enthusiast",
-        avatar: "/images/avatars/default.jpg",
-        content: "The custom hooks example is exactly what I needed. Thanks!",
-        date: "2024-08-17",
-        likes: 8,
-      },
-    ],
+    likes: 0,
+    comments: [],
   },
   {
     id: 2,
-    slug: "building-responsive-layouts-tailwind",
-    title: "Building Responsive Layouts with Tailwind CSS",
-    excerpt: "Master responsive design using Tailwind CSS utility classes and create beautiful layouts for all screen sizes.",
-    content: `
-## Introduction
+    slug: "my-research-journey-nifs-supercapacitors",
+    title: "My Research Journey at NIFS: Exploring Supercapacitors",
+    excerpt: "Reflecting on my experience as a volunteer researcher at the National Institute of Fundamental Studies, working on energy storage devices.",
+    content: `## The Beginning
 
-Tailwind CSS has changed the way developers approach styling. Its utility-first approach makes building responsive layouts incredibly intuitive.
+In October 2022, fresh out of A/Levels with a national rank of 98, I had the incredible opportunity to work at NIFS (National Institute of Fundamental Studies) in Hanthana.
 
-## The Mobile-First Approach
+### The Team
 
-Tailwind uses a mobile-first breakpoint system. This means unprefixed utilities apply to all screen sizes, while prefixed utilities apply at specific breakpoints and above.
+I worked under:
+- **Prof. Ashoka Kumara** - Department Head
+- **Mr. Asiri** - Assistant Researcher
+- **Miss Ishara** - Assistant Researcher
 
-\`\`\`html
-<div class="w-full md:w-1/2 lg:w-1/3">
-  <!-- Full width on mobile, half on medium, third on large -->
-</div>
-\`\`\`
+### The Research Focus
 
-## Breakpoints
+Our work centered on **supercapacitors using activated carbon**—energy storage devices that bridge the gap between batteries and conventional capacitors.
 
-Tailwind provides five default breakpoints:
+### What I Learned
 
-- \`sm\`: 640px and up
-- \`md\`: 768px and up
-- \`lg\`: 1024px and up
-- \`xl\`: 1280px and up
-- \`2xl\`: 1536px and up
+**1. Device Fabrication**
+Hands-on experience building devices from raw materials, understanding the importance of precision and safety standards.
 
-## Flexbox & Grid
+**2. Data Analysis**
+Mastered Origin software for analyzing experimental data, ensuring accuracy in results.
 
-Tailwind makes Flexbox and Grid layouts simple:
+**3. Literature Review**
+Developed skills in reading research papers, proper referencing, and maintaining academic integrity.
 
-\`\`\`html
-<!-- Flexbox -->
-<div class="flex flex-col md:flex-row gap-4">
-  <div class="flex-1">Item 1</div>
-  <div class="flex-1">Item 2</div>
-</div>
+**4. Research Methodology**
+Learned the systematic approach to scientific inquiry.
 
-<!-- Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <div>Card 1</div>
-  <div>Card 2</div>
-  <div>Card 3</div>
-</div>
-\`\`\`
+### The Demonstration
 
-## Conclusion
+One memorable moment was powering a DC motor with our fabricated supercapacitor, demonstrating:
+- High power density for short bursts
+- Rapid charge/discharge capabilities
+- Potential for renewable energy applications
 
-With Tailwind CSS, responsive design becomes second nature. Start building beautiful, responsive layouts today!
-    `,
-    coverImage: "/images/blogs/tailwind-css.jpg",
-    author: "Your Name",
-    category: "tutorials",
-    tags: ["CSS", "Tailwind", "Responsive Design", "Frontend"],
-    publishedAt: "2024-07-28",
+### Impact on My Path
+
+This experience confirmed my passion for research and the intersection of fundamental science with practical applications. It set the foundation for my current work in AI/ML at MARC.
+
+*The lessons from NIFS continue to shape how I approach every research problem.*`,
+    coverImage: "/images/blogs/nifs-research.jpg",
+    author: "Oshadha Samarakoon",
+    category: "research",
+    tags: ["research", "NIFS", "supercapacitors", "materials-science", "energy-storage"],
+    publishedAt: "2025-10-20",
     readTime: 6,
-    featured: true,
-    likes: 98,
-    comments: [
-      {
-        id: 1,
-        author: "Design Lover",
-        avatar: "/images/avatars/default.jpg",
-        content: "Tailwind has made my workflow so much faster!",
-        date: "2024-07-29",
-        likes: 5,
-      },
-    ],
+    featured: false,
+    likes: 0,
+    comments: [],
   },
   {
     id: 3,
-    slug: "my-journey-into-tech",
-    title: "My Journey Into Tech: From Beginner to Developer",
-    excerpt: "A personal story about how I transitioned into tech and the lessons I learned along the way.",
-    content: `
-## The Beginning
+    slug: "competitive-programming-three-year-journey",
+    title: "Three Years of Competitive Programming: Lessons and Growth",
+    excerpt: "From knowing zero Python to grand finals - my journey through competitive programming competitions.",
+    content: `## The Beginning: Season 1 (2023)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. My journey into technology started with curiosity and a desire to create.
+Our first step into the coding arena came at the ACES Pre-Coders competition. We jumped in with **zero prior knowledge of Python**.
 
-## The Challenges
+### Learning on the Fly
 
-Like many beginners, I faced numerous obstacles:
+We sat down, learned on the spot, and managed to secure a spot among the **Top 25 teams** from our university!
 
-- Imposter syndrome
-- Information overload
-- Choosing the right path
-- Staying motivated
+From Pre-Coders to Coders V10.0—the experience was unmatched.
 
-## Key Lessons Learned
+### Season 2: The Grind (2024)
 
-1. **Consistency beats intensity**: Coding every day, even for 30 minutes, compounds over time
-2. **Build projects**: Tutorial hell is real. Building your own projects is the fastest way to learn
-3. **Community matters**: Finding your tribe makes the journey enjoyable
-4. **Embrace failure**: Every bug is a learning opportunity
+IEEEXtreme, Coders V11, Pre-Coders, MoraXtreme, ReidXtreme...
 
-## Advice for Beginners
+Countless hours of problem-solving, debugging, and pushing limits. We fell short of the ranks we aimed for—a season of heartache, but also growth.
 
-If you're just starting out:
+### The AI Revolution in CP
 
-- Pick one language and stick with it
-- Don't compare your Chapter 1 to someone else's Chapter 20
-- Document your journey
-- Ask for help when stuck
+In a rapidly evolving world, AI is reshaping competitive programming. Tools like AI copilots have opened new possibilities. But at its core, CP remains about:
+- **Logical thinking**
+- **Structured learning**
+- **Hard work**
 
-## Conclusion
+The synergy of human problem-solving combined with AI tools can unlock new heights.
 
-The tech journey is a marathon, not a sprint. Enjoy the process and celebrate small wins!
-    `,
-    coverImage: "/images/blogs/journey.jpg",
-    author: "Your Name",
+### Season 3: Breakthrough (2025)
+
+This year, everything clicked. Selected for **5+ grand finals out of 6-7 competitions**!
+
+### Key Lessons
+
+1. **Consistency beats intensity** - Daily practice > sporadic marathons
+2. **Understand, don't memorize** - Build intuition for patterns
+3. **Learn from failures** - Every wrong answer teaches something
+4. **Team synergy matters** - Communication is key in team contests
+
+### Looking Forward
+
+The grind continues. Each competition is an opportunity to learn, improve, and push boundaries.
+
+*Failure isn't final. It's just the next step towards something better.*`,
+    coverImage: "/images/blogs/competitive-programming.jpg",
+    author: "Oshadha Samarakoon",
     category: "life",
-    tags: ["Career", "Personal", "Motivation", "Beginner"],
-    publishedAt: "2024-06-10",
+    tags: ["competitive-programming", "algorithms", "personal-growth", "coding"],
+    publishedAt: "2025-10-01",
     readTime: 5,
-    featured: false,
-    likes: 256,
-    comments: [
-      {
-        id: 1,
-        author: "Aspiring Dev",
-        avatar: "/images/avatars/default.jpg",
-        content: "This is so inspiring! Thank you for sharing your story.",
-        date: "2024-06-11",
-        likes: 23,
-      },
-      {
-        id: 2,
-        author: "Fellow Coder",
-        avatar: "/images/avatars/default.jpg",
-        content: "The part about imposter syndrome really resonated with me.",
-        date: "2024-06-12",
-        likes: 15,
-      },
-    ],
+    featured: true,
+    likes: 0,
+    comments: [],
   },
   {
     id: 4,
-    slug: "nodejs-api-best-practices",
-    title: "Node.js API Best Practices for Production",
-    excerpt: "Essential patterns and practices for building robust, scalable Node.js APIs ready for production.",
-    content: `
-## Introduction
+    slug: "first-year-engineering-reflections",
+    title: "Reflections on First Year Engineering: Rank 41 out of 457",
+    excerpt: "Looking back at my first year at University of Peradeniya's Faculty of Engineering - the challenges, the growth, and joining DEEE.",
+    content: `## The Journey Begins
 
-Building a Node.js API that can handle production traffic requires careful consideration of various factors.
+In June 2023, I entered the prestigious Faculty of Engineering at University of Peradeniya. Little did I know what an incredible year awaited.
 
-## Project Structure
+### The Numbers
 
-A well-organized project structure is crucial:
+- **Final GPA**: 3.7545/4.0
+- **Rank**: 41 out of 457 students
+- **Department**: Selected for DEEE (Electrical & Electronic Engineering)
 
-\`\`\`
-src/
-├── controllers/    # Request handlers
-├── services/       # Business logic
-├── models/         # Data models
-├── middleware/     # Custom middleware
-├── routes/         # Route definitions
-├── utils/          # Helper functions
-├── config/         # Configuration
-└── app.js          # Application entry
-\`\`\`
+### What Made the Difference
 
-## Error Handling
+**1. First Principles Thinking**
+I don't follow conventional study paths. I prefer to dismantle ideas, rebuild them from scratch, and truly understand the underlying principles.
 
-Always implement centralized error handling:
+**2. Balanced Approach**
+While many focused solely on academics, I maintained involvement in:
+- Research at MARC
+- Competitive programming
+- Organizing committees (Predicta)
+- Reading and philosophy
 
-\`\`\`javascript
-// middleware/errorHandler.js
-const errorHandler = (err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  
-  res.status(statusCode).json({
-    success: false,
-    message: err.message,
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-  });
-};
-\`\`\`
+**3. Deep Work**
+Quality over quantity. Focused study sessions beat long, distracted hours.
 
-## Validation
+### The GP118 Line Following Robot
 
-Always validate incoming data:
+One highlight was our first year project—a line following robot with PID control. Despite circuit issues at the competition, the learning was invaluable.
 
-\`\`\`javascript
-import Joi from 'joi';
+Demonstrated at "Let My Country Awaken 2024"!
 
-const userSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(8).required(),
-});
-\`\`\`
+### Joining DEEE
 
-## Security
+Being selected for the Department of Electrical and Electronic Engineering opened doors to:
+- Signal Processing courses
+- Power Systems fundamentals
+- Control Theory
+- Research opportunities
 
-- Use helmet for HTTP headers
-- Implement rate limiting
-- Sanitize user input
-- Use HTTPS in production
+### Advice for Future First Years
 
-## Conclusion
+1. **Build strong foundations** - Don't skip the basics
+2. **Find your community** - Collaborate and learn together
+3. **Start exploring early** - Don't wait to find your interests
+4. **Balance is key** - Academics aren't everything
 
-Following these best practices will help you build reliable, maintainable APIs.
-    `,
-    coverImage: "/images/blogs/nodejs.jpg",
-    author: "Your Name",
-    category: "tech",
-    tags: ["Node.js", "API", "Backend", "Best Practices"],
-    publishedAt: "2024-05-20",
-    readTime: 10,
+*Currently maintaining 3.7/4.0 in third year. The journey continues.*`,
+    coverImage: "/images/blogs/first-year.jpg",
+    author: "Oshadha Samarakoon",
+    category: "life",
+    tags: ["university", "engineering", "Peradeniya", "DEEE", "personal"],
+    publishedAt: "2025-08-15",
+    readTime: 5,
     featured: false,
-    likes: 187,
+    likes: 0,
     comments: [],
   },
   {
     id: 5,
-    slug: "work-life-balance-developers",
-    title: "Finding Work-Life Balance as a Developer",
-    excerpt: "Tips and strategies for maintaining a healthy balance between coding and personal life.",
-    content: `
-## The Burnout Problem
+    slug: "introduction-to-jax-functional-ml",
+    title: "Getting Started with JAX: Functional Machine Learning",
+    excerpt: "An introduction to Google's JAX framework - why it matters and how to get started with functional ML programming.",
+    content: `## Why JAX?
 
-Developer burnout is real. The constant pressure to learn, ship, and keep up can be overwhelming.
+JAX is Google's high-performance numerical computing library. It combines:
+- **NumPy's familiar interface**
+- **XLA compilation** for speed
+- **Automatic differentiation**
+- **GPU/TPU acceleration**
 
-## Setting Boundaries
+### The Functional Paradigm
 
-- Define your working hours and stick to them
-- Turn off work notifications after hours
-- Create a dedicated workspace
+Unlike PyTorch or TensorFlow, JAX encourages functional programming:
 
-## Taking Breaks
+\`\`\`python
+import jax
+import jax.numpy as jnp
 
-The Pomodoro Technique works wonders:
-- 25 minutes focused work
-- 5 minutes break
-- After 4 sessions, take a longer 15-30 minute break
+# Pure function - no side effects
+def loss_fn(params, x, y):
+    predictions = model(params, x)
+    return jnp.mean((predictions - y) ** 2)
 
-## Hobbies Outside Tech
-
-Having non-tech hobbies is essential:
-- Exercise and physical activities
-- Creative pursuits (music, art, writing)
-- Spending time in nature
-
-## Conclusion
-
-Your worth isn't measured by your commits. Take care of yourself!
-    `,
-    coverImage: "/images/blogs/balance.jpg",
-    author: "Your Name",
-    category: "life",
-    tags: ["Wellness", "Career", "Productivity", "Mental Health"],
-    publishedAt: "2024-04-15",
-    readTime: 4,
-    featured: false,
-    likes: 312,
-    comments: [
-      {
-        id: 1,
-        author: "Tired Dev",
-        avatar: "/images/avatars/default.jpg",
-        content: "I needed to read this today. Thank you!",
-        date: "2024-04-16",
-        likes: 45,
-      },
-    ],
-  },
-  {
-    id: 6,
-    slug: "complete-guide-git-workflow",
-    title: "Complete Guide to Git Workflow for Teams",
-    excerpt: "Learn professional Git workflows, branching strategies, and collaboration techniques for development teams.",
-    content: `
-## Introduction
-
-Git is essential for modern development. This guide covers professional workflows for team collaboration.
-
-## Branching Strategy
-
-A clean branching strategy keeps your repository organized:
-
-- \`main\`: Production-ready code
-- \`develop\`: Integration branch
-- \`feature/*\`: New features
-- \`bugfix/*\`: Bug fixes
-- \`hotfix/*\`: Urgent production fixes
-
-## Commit Messages
-
-Write meaningful commit messages:
-
-\`\`\`
-type(scope): subject
-
-body
-
-footer
+# Automatic gradient computation
+grad_fn = jax.grad(loss_fn)
 \`\`\`
 
-Types: feat, fix, docs, style, refactor, test, chore
+### Key JAX Transformations
 
-## Pull Request Best Practices
+**1. jit - Just-In-Time Compilation**
+\`\`\`python
+@jax.jit
+def fast_function(x):
+    return jnp.dot(x, x.T)
+\`\`\`
 
-- Keep PRs small and focused
-- Write clear descriptions
-- Include screenshots for UI changes
-- Request reviews from relevant team members
+**2. grad - Automatic Differentiation**
+\`\`\`python
+gradient = jax.grad(loss_fn)(params, x, y)
+\`\`\`
 
-## Conclusion
+**3. vmap - Automatic Vectorization**
+\`\`\`python
+# Apply function to batch automatically
+batched_fn = jax.vmap(single_fn)
+\`\`\`
 
-Good Git practices lead to smoother collaboration and cleaner history.
-    `,
-    coverImage: "/images/blogs/git.jpg",
-    author: "Your Name",
+**4. pmap - Parallelization**
+\`\`\`python
+# Distribute across devices
+parallel_fn = jax.pmap(fn)
+\`\`\`
+
+### When to Use JAX
+
+- Research requiring custom gradients
+- High-performance inference
+- Scientific computing
+- When you need fine-grained control
+
+### Getting Started
+
+\`\`\`bash
+pip install jax jaxlib
+\`\`\`
+
+Check out my [JAX repository](https://github.com/Oshadha345/JAX) for examples and experiments!
+
+*JAX is reshaping how we think about ML frameworks.*`,
+    coverImage: "/images/blogs/jax-intro.jpg",
+    author: "Oshadha Samarakoon",
     category: "tutorials",
-    tags: ["Git", "DevOps", "Collaboration", "Best Practices"],
-    publishedAt: "2024-03-08",
+    tags: ["JAX", "machine-learning", "python", "tutorial", "deep-learning"],
+    publishedAt: "2025-09-10",
     readTime: 7,
     featured: false,
-    likes: 156,
+    likes: 0,
     comments: [],
   },
 ]
@@ -483,88 +337,38 @@ Good Git practices lead to smoother collaboration and cleaner history.
 // =============================================================================
 
 export const blogCategories = [
-  { id: "all", label: "All Posts", icon: "LayoutGrid" },
-  { id: "tech", label: "Tech", icon: "Code" },
-  { id: "life", label: "Life", icon: "Heart" },
-  { id: "tutorials", label: "Tutorials", icon: "BookOpen" },
+  { id: 'all', label: 'All Posts', icon: 'LayoutGrid' },
+  { id: 'tech', label: 'Tech', icon: 'Code' },
+  { id: 'research', label: 'Research', icon: 'Brain' },
+  { id: 'tutorials', label: 'Tutorials', icon: 'GraduationCap' },
+  { id: 'life', label: 'Life', icon: 'Heart' },
 ]
 
 // =============================================================================
 // HELPER FUNCTIONS
 // =============================================================================
 
-/**
- * Get all blogs sorted by date (newest first)
- */
 export const getLatestBlogs = () => {
-  return [...blogs].sort((a, b) => 
-    new Date(b.publishedAt) - new Date(a.publishedAt)
-  )
+  return [...blogs].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
 }
 
-/**
- * Get featured blogs
- */
 export const getFeaturedBlogs = () => {
-  return blogs.filter(blog => blog.featured)
+  return blogs.filter(b => b.featured).sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
 }
 
-/**
- * Get blog by slug
- */
-export const getBlogBySlug = (slug) => {
-  return blogs.find(blog => blog.slug === slug)
-}
+export const getBlogBySlug = (slug) => blogs.find(b => b.slug === slug)
 
-/**
- * Get blog by ID
- */
-export const getBlogById = (id) => {
-  return blogs.find(blog => blog.id === parseInt(id))
-}
-
-/**
- * Get blogs by category
- */
 export const getBlogsByCategory = (category) => {
-  if (category === "all") return getLatestBlogs()
-  return blogs.filter(blog => blog.category === category)
+  if (category === 'all') return getLatestBlogs()
+  return blogs.filter(b => b.category === category).sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
 }
 
-/**
- * Get blogs by tag
- */
-export const getBlogsByTag = (tag) => {
-  return blogs.filter(blog => 
-    blog.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
-  )
-}
-
-/**
- * Get all unique tags
- */
-export const getAllTags = () => {
-  const allTags = blogs.flatMap(blog => blog.tags)
-  return [...new Set(allTags)]
-}
-
-/**
- * Get most popular blogs (by likes)
- */
 export const getPopularBlogs = (limit = 5) => {
-  return [...blogs]
-    .sort((a, b) => b.likes - a.likes)
-    .slice(0, limit)
+  return [...blogs].sort((a, b) => b.likes - a.likes).slice(0, limit)
 }
 
-/**
- * Search blogs by title or content
- */
-export const searchBlogs = (query) => {
-  const lowercaseQuery = query.toLowerCase()
-  return blogs.filter(blog => 
-    blog.title.toLowerCase().includes(lowercaseQuery) ||
-    blog.excerpt.toLowerCase().includes(lowercaseQuery) ||
-    blog.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
-  )
+export const getAllTags = () => {
+  const tagSet = new Set()
+  blogs.forEach(b => b.tags.forEach(t => tagSet.add(t)))
+  return Array.from(tagSet).sort()
 }
