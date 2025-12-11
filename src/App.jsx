@@ -40,7 +40,7 @@ function App() {
       <SEO />
       
       {/* Main App Container with mesh gradient background */}
-      <div className="fixed inset-0 mesh-gradient -z-10">
+      <div className="relative flex flex-col min-h-screen w-full">
         {/* Navigation - Always visible */}
         <Navbar />
         
