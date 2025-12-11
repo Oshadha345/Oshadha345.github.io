@@ -35,5 +35,9 @@ export default defineConfig({
         },
       },
     },
+    outDir: 'docs',
+    assetsDir: 'assets',
+    // Ensure CSS is properly extracted
+    cssCodeSplit: false,
   },
 })

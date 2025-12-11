@@ -9,7 +9,7 @@
 //
 // =============================================================================
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Layout Components
 import Navbar from './components/layout/Navbar'
@@ -40,7 +40,7 @@ function App() {
       <SEO />
       
       {/* Main App Container with mesh gradient background */}
-      <div className="relative flex flex-col min-h-screen w-full">
+      <div className="fixed inset-0 mesh-gradient -z-10">
         {/* Navigation - Always visible */}
         <Navbar />
         
