@@ -34,8 +34,7 @@ export {
   getBlogBySlug,
   getBlogsByCategory,
   getAllTags,
-  getPopularBlogs,
-  getBookSundayPosts
+  getPopularBlogs
 } from './blogs'
 
 // Books Data & Helpers (Book Sunday)

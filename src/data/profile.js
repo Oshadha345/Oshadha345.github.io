@@ -23,7 +23,7 @@ When I'm not coding or researching, you'll find me diving into books, participat
   // ---------------------------------------------------------------------------
   // MEDIA
   // ---------------------------------------------------------------------------
-  avatar: "/images/avatar.jpg",
+  avatar: "/images/avatars/avatar.png",
   resumeUrl: "/resume.pdf",
   
   // ---------------------------------------------------------------------------
@@ -78,7 +78,7 @@ When I'm not coding or researching, you'll find me diving into books, participat
   animatedRoles: [
     "AI/ML Researcher",
     "EEE Undergraduate",
-    "Computer Vision Developer",
+    "Computer Vision Enthusiast",
     "DSP Enthusiast",
     "Competitive Programmer",
     "Philosophy Explorer",

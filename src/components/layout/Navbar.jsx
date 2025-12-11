@@ -14,186 +14,187 @@
 //
 // =============================================================================
 
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Download } from 'lucide-react'
-import { profile } from '../../data'
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Home, FolderOpen, Trophy, BookOpen, FileText, BookHeart } from "lucide-react";
 
 // ---------------------------------------------------------------------------
-// NAVIGATION LINKS CONFIGURATION
+// Navigation items configuration
 // ---------------------------------------------------------------------------
-// Add or remove navigation items here
+const navItems = [
+  { name: "Home", path: "/", icon: Home },
+  { name: "Projects", path: "/projects", icon: FolderOpen },
+  { name: "Achievements", path: "/achievements", icon: Trophy },
+  { name: "Blog", path: "/blog", icon: BookOpen },
+  { name: "Book Sunday", path: "/book-sunday", icon: BookHeart },
+  { name: "Resume", path: "/resume", icon: FileText },
+];
 
-const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Achievements', path: '/achievements' },
-  { name: 'Blog', path: '/blog' },
-  { name: '📚 Book Sunday', path: '/book-sunday' },
-]
-
-// =============================================================================
+// ---------------------------------------------------------------------------
 // NAVBAR COMPONENT
-// =============================================================================
-
+// ---------------------------------------------------------------------------
 const Navbar = () => {
-  // State for mobile menu toggle
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  
-  // State for scroll effect
-  const [isScrolled, setIsScrolled] = useState(false)
-  
-  // Get current route for active link styling
-  const location = useLocation()
-  
-  // ---------------------------------------------------------------------------
-  // SCROLL EFFECT
-  // ---------------------------------------------------------------------------
-  // Adds background blur when user scrolls down
-  
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  // -------------------------------------------------------------------------
+  // Handle scroll effect
+  // -------------------------------------------------------------------------
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-  
-  // ---------------------------------------------------------------------------
-  // CLOSE MENU ON ROUTE CHANGE
-  // ---------------------------------------------------------------------------
-  
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // -------------------------------------------------------------------------
+  // Close mobile menu on route change
+  // -------------------------------------------------------------------------
   useEffect(() => {
-    setIsMenuOpen(false)
-  }, [location])
-  
-  // ---------------------------------------------------------------------------
-  // CHECK IF LINK IS ACTIVE
-  // ---------------------------------------------------------------------------
-  
-  const isActiveLink = (path) => {
-    if (path === '/') {
-      return location.pathname === '/'
+    setIsOpen(false);
+  }, [location]);
+
+  // -------------------------------------------------------------------------
+  // Prevent body scroll when mobile menu is open
+  // -------------------------------------------------------------------------
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
     }
-    return location.pathname.startsWith(path)
-  }
-  
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   return (
-    <nav 
-      className={`
-        fixed top-0 left-0 right-0 z-50 
-        transition-all duration-300
-        ${isScrolled ? 'glass-nav py-3' : 'py-5 bg-transparent'}
-      `}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          
-          {/* ----------------------------------------------------------------- */}
-          {/* LOGO / NAME                                                       */}
-          {/* ----------------------------------------------------------------- */}
-          
-          <Link 
-            to="/" 
-            className="flex items-center gap-2 group"
+    <>
+      {/* --------------------------------------------------------------------
+          DESKTOP NAVBAR - Floating glass bar
+      -------------------------------------------------------------------- */}
+      <nav
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+          scrolled ? "top-2" : "top-4"
+        }`}
+      >
+        <div
+          className={`glass-card px-6 py-3 flex items-center gap-8 transition-all duration-300 ${
+            scrolled ? "shadow-lg shadow-black/20" : ""
+          }`}
+        >
+          {/* Logo */}
+          <Link
+            to="/"
+            className="text-xl font-bold text-white hover:text-blue-400 transition-colors"
           >
-            {/* Logo Icon - You can replace with an image */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg group-hover:scale-110 transition-transform">
-              {profile.name.charAt(0)}
-            </div>
-            
-            {/* Name */}
-            <span className="text-xl font-bold gradient-text hidden sm:block">
-              {profile.name}
-            </span>
+            Oshadha<span className="text-blue-400">.</span>
           </Link>
-          
-          {/* ----------------------------------------------------------------- */}
-          {/* DESKTOP NAVIGATION                                                */}
-          {/* ----------------------------------------------------------------- */}
-          
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`
-                  px-4 py-2 rounded-lg font-medium transition-all duration-200
-                  ${isActiveLink(link.path)
-                    ? 'text-white bg-white/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }
-                `}
-              >
-                {link.name}
-              </Link>
-            ))}
-            
-            {/* Resume Button */}
-            <a
-              href={profile.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-4 btn-primary flex items-center gap-2 text-sm"
-            >
-              <Download size={16} />
-              Resume
-            </a>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-6">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`relative text-sm font-medium transition-colors duration-200 ${
+                    isActive
+                      ? "text-blue-400"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  {item.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-400 rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
           </div>
-          
-          {/* ----------------------------------------------------------------- */}
-          {/* MOBILE MENU BUTTON                                                */}
-          {/* ----------------------------------------------------------------- */}
-          
+
+          {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-gray-300 hover:text-white transition-colors"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-        
-        {/* ------------------------------------------------------------------- */}
-        {/* MOBILE NAVIGATION MENU                                              */}
-        {/* ------------------------------------------------------------------- */}
-        
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 animate-fade-in">
-            <div className="glass-card p-4 space-y-2">
-              {navLinks.map((link) => (
+      </nav>
+
+      {/* --------------------------------------------------------------------
+          MOBILE MENU OVERLAY - Dark backdrop
+      -------------------------------------------------------------------- */}
+      <div
+        className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsOpen(false)}
+      />
+
+      {/* --------------------------------------------------------------------
+          MOBILE MENU PANEL - Slide from right (FIXED: More opaque background)
+      -------------------------------------------------------------------- */}
+      <div
+        className={`fixed top-0 right-0 h-full w-72 z-50 md:hidden transform transition-transform duration-300 ease-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* 
+          FIXED: Changed from semi-transparent to solid dark background
+          - bg-gray-900/98 = almost fully opaque dark background
+          - Added border for depth
+        */}
+        <div className="h-full bg-gray-900/98 backdrop-blur-xl border-l border-white/10 shadow-2xl shadow-black/50 p-6 pt-20">
+          {/* Close button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+
+          {/* Mobile Navigation Links */}
+          <div className="flex flex-col gap-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname === item.path;
+              return (
                 <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`
-                    block px-4 py-3 rounded-lg font-medium transition-all duration-200
-                    ${isActiveLink(link.path)
-                      ? 'text-white bg-white/10'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }
-                  `}
+                  key={item.name}
+                  to={item.path}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+                    isActive
+                      ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                      : "text-gray-300 hover:bg-white/10 hover:text-white"
+                  }`}
                 >
-                  {link.name}
+                  <Icon size={20} />
+                  <span className="font-medium">{item.name}</span>
                 </Link>
-              ))}
-              
-              {/* Mobile Resume Button */}
-              <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 mt-4 btn-primary w-full"
-              >
-                <Download size={16} />
-                Download Resume
-              </a>
+              );
+            })}
+          </div>
+
+          {/* Mobile Menu Footer */}
+          <div className="absolute bottom-8 left-6 right-6">
+            <div className="border-t border-white/10 pt-6">
+              <p className="text-gray-500 text-sm text-center">
+                © 2024 Oshadha Samarakoon
+              </p>
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </nav>
-  )
-}
+    </>
+  );
+};
 
-export default Navbar
+export default Navbar;

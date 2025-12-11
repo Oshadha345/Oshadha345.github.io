@@ -195,7 +195,7 @@ const Hero = () => {
               </div>
               
               <div className="absolute top-1/4 -left-8 glass-card px-4 py-2 rounded-full animate-float animation-delay-400">
-                <span className="text-sm font-medium text-purple-400">Mamba/SSM</span>
+                <span className="text-sm font-medium text-black-400">Mamba/SSM</span>
               </div>
               
               <div className="absolute bottom-1/4 -right-8 glass-card px-4 py-2 rounded-full animate-float animation-delay-600">
@@ -203,7 +203,7 @@ const Hero = () => {
               </div>
               
               <div className="absolute -bottom-4 left-1/4 glass-card px-4 py-2 rounded-full animate-float animation-delay-800">
-                <span className="text-sm font-medium text-pink-400">MATLAB</span>
+                <span className="text-sm font-medium text-brown-400">MATLAB</span>
               </div>
             </div>
             
