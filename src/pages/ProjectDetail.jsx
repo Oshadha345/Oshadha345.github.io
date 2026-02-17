@@ -30,11 +30,11 @@ import { getProjectById, projects } from '../data'
 // =============================================================================
 
 const ProjectDetail = () => {
-  const { id } = useParams()
+  const { id, slug } = useParams()
   const navigate = useNavigate()
   
   // Get project data
-  const project = getProjectById(id)
+  const project = getProjectById(id ?? slug)
   
   // Handle project not found
   if (!project) {
