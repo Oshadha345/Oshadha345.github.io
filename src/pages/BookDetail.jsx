@@ -9,6 +9,9 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Star, Calendar, Clock, BookOpen, ExternalLink, Share2 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 // Components
 import SEO from '../components/common/SEO'
@@ -207,48 +210,12 @@ const BookDetail = () => {
           {/* ----------------------------------------------------------------------- */}
           
           <div className="glass-card p-6 sm:p-8 mb-8">
-            <div className="prose prose-invert prose-lg max-w-none">
+            <div className="prose prose-invert max-w-none">
               <ReactMarkdown
-                components={{
-                  h2: ({ children }) => (
-                    <h2 className="text-2xl font-bold text-white mt-8 mb-4 first:mt-0">
-                      {children}
-                    </h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="text-xl font-semibold text-white mt-6 mb-3">
-                      {children}
-                    </h3>
-                  ),
-                  p: ({ children }) => (
-                    <p className="text-gray-300 leading-relaxed mb-4">
-                      {children}
-                    </p>
-                  ),
-                  ul: ({ children }) => (
-                    <ul className="list-disc list-inside space-y-2 text-gray-300 mb-4">
-                      {children}
-                    </ul>
-                  ),
-                  li: ({ children }) => (
-                    <li className="text-gray-300">{children}</li>
-                  ),
-                  strong: ({ children }) => (
-                    <strong className="text-white font-semibold">{children}</strong>
-                  ),
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-400 my-4">
-                      {children}
-                    </blockquote>
-                  ),
-                  code: ({ children }) => (
-                    <code className="bg-white/10 px-2 py-1 rounded text-blue-300">
-                      {children}
-                    </code>
-                  ),
-                }}
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
               >
-                {book.content}
+                {book.content || book.fullReview || ""}
               </ReactMarkdown>
             </div>
           </div>

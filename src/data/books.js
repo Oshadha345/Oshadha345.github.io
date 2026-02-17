@@ -17,16 +17,16 @@
 
 export const books = [
   // ---------------------------------------------------------------------------
-  // EXAMPLE BOOK REVIEW - Replace with your actual reviews
+  // BOOK REVIEW 1
   // ---------------------------------------------------------------------------
   {
     id: 1,
-    slug: "example-book-review",
+    slug: "godel-escher-bach",
     title: "Gödel, Escher, Bach: An Eternal Golden Braid",
     author: "Douglas Hofstadter",
     
     // Book cover image - place in /public/images/books/
-    coverImage: "/images/books/godel-escher-bach.jpg",
+    coverImage: "/images/books/An_Eternal_Golden_Braid.jpg",
     
     // Category - choose from bookCategories below
     category: "philosophy-consciousness",
@@ -37,7 +37,7 @@ export const books = [
     // Short excerpt for cards (max 150 chars)
     excerpt: "A masterpiece exploring the nature of consciousness, self-reference, and strange loops through mathematics, art, and music.",
     
-    // Full review content (supports markdown-like formatting)
+    // Full review content (Markdown)
     content: `## Why I Picked This Up
 
 This book has been on my reading list for years. As someone fascinated by consciousness, mathematics, and the nature of intelligence, GEB seemed like essential reading.
@@ -75,7 +75,8 @@ This book directly relates to my interest in:
 
 ⭐⭐⭐⭐⭐ A life-changing read for anyone interested in the nature of mind and meaning.
 
-**Who Should Read This:** Anyone curious about consciousness, AI, mathematics, or the deep structure of reality.`,
+**Who Should Read This:** Anyone curious about consciousness, AI, mathematics, or the deep structure of reality.
+`,
     
     // Tags for filtering
     tags: ["consciousness", "mathematics", "philosophy", "AI", "self-reference"],
@@ -94,8 +95,7 @@ This book directly relates to my interest in:
     
     // Optional: Where to buy/find the book
     bookLinks: {
-      amazon: "https://amazon.com/...",
-      goodreads: "https://goodreads.com/...",
+      amazon : "https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567"
     },
     
     // Optional: Page count

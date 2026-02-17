@@ -12,6 +12,7 @@
    ============================================================================= */
 
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* =============================================================================
    CSS CUSTOM PROPERTIES (Variables)
@@ -464,4 +465,33 @@
 
 .blog-content a:hover {
   color: var(--color-accent);
+}
+
+/* =============================================================================
+   MARKDOWN CONTENT STYLES
+   ============================================================================= */
+
+.project-markdown {
+  max-width: none;
+}
+
+.project-markdown :where(h2, h3, h4) {
+  scroll-margin-top: 90px;
+}
+
+.project-markdown img {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.project-markdown figure {
+  margin: 1.25rem 0;
+}
+
+.project-markdown figcaption {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }

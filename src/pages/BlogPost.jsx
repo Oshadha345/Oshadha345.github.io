@@ -26,6 +26,10 @@ import {
   Link as LinkIcon,
   User
 } from 'lucide-react'
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 // Components
 import BlogCard from '../components/cards/BlogCard'
@@ -329,7 +333,14 @@ const BlogPost = () => {
           
           <div className="glass-card p-6 sm:p-10 mb-12 animate-fade-in-up animation-delay-400">
             <div className="blog-content">
-              {renderContent(blog.content)}
+              <div className="prose prose-invert max-w-none">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
+                >
+                  {post.content}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
           

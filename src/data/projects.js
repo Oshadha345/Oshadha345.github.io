@@ -413,17 +413,13 @@ Demonstrated at "Let My Country Awaken 2024" exhibition, University of Peradeniy
   },
 
   // EE254 
-  // ...existing code...
-
 {
-  id: 999,
+  id: 14,
   title: "Simon Says 🤖🔊",
   slug: "simon-says-audio-classification-esp32-matlab",
   shortDescription:
     "Interactive Simon Says game using real-time audio classification on ESP32 hardware with MATLAB signal processing.",
   fullDescription: `
-## Simon Says 🤖🔊
-
 Interactive Simon Says game using **real-time audio classification** on **ESP32 hardware** with **MATLAB signal processing**.
 
 ### Overview
@@ -465,34 +461,41 @@ This **completed EE254 – Digital Instrumentation** group project recreates Sim
 
 ### Figures 
 
-![MATLAB GUI game interface](/Images/Projects/Simon Says/GUI.jpg)  
+
 *MATLAB GUI game interface*
+![MATLAB GUI game interface](/images/projects/Simon_Says/GUI.jpg)  
 
-![Hardware enclosure / game box](/Images/Projects/Simon Says/Game box.jpg)  
 *Hardware enclosure / game box*
+![Hardware enclosure / game box](/images/projects/Simon_Says/Game_box.jpg)  
 
-![Internal hardware layout](/Images/Projects/Simon Says/Game Box Inside hardware.jpg)  
+
 *Internal hardware layout*
+![Internal hardware layout](/images/projects/Simon_Says/Game_Box_Inside_hardware.jpg)  
 
-![Spectral centroid separation visualization](/Images/Projects/Simon Says/centroid.jpg)  
+
 *Spectral centroid separation visualization*
+![Spectral centroid separation visualization](/images/projects/Simon_Says/centroid.jpg)  
 
-![Time/Frequency domain analysis](/Images/Projects/Simon Says/F and T domain .jpg)  
 *Time/Frequency domain analysis*
+![Time/Frequency domain analysis](/images/projects/Simon_Says/F_and_T_domain.jpg)  
 
-![Model accuracy results](/Images/Projects/Simon Says/accuracy of model.jpg)  
 *Model accuracy results*
+![Model accuracy results](/images/projects/Simon_Says/accuracy_of_model.jpg)  
 
-![Impulse duration analysis](/Images/Projects/Simon Says/impulse duration snap sample.jpg)  
 *Impulse duration analysis*
+![Impulse duration analysis](/images/projects/Simon_Says/impulse_duration_snap_sample.jpg) 
+![Impulse duration analysis](/images/projects/Simon_Says/impulse_duration_clap_sample.jpg)
+![Impulse duration analysis](/images/projects/Simon_Says/impulse_duration_knock_sample.jpg) 
+
 
 
 
 ### Links
 - **GitHub repo:** https://github.com/kaweesha2002/SVAIS
 - **Project page:** https://sites.google.com/view/symon-says/home
-`,
-  image: "/Images/Projects/Simon Says/GUI.jpg",
+`
+,
+  image: "/images/projects/Simon_Says/Logo.png",
   techStack: [
     "MATLAB",
     "Signal Processing Toolbox",
@@ -522,7 +525,7 @@ This **completed EE254 – Digital Instrumentation** group project recreates Sim
   // AI AGENTS & OTHER
   // ---------------------------------------------------------------------------
   {
-    id: 14,
+    id: 15,
     title: "AI Agents",
     shortDescription: "Implementations and experiments with autonomous AI agents and tool-using systems.",
     fullDescription: `Exploration of modern AI agent architectures including LLM-based autonomous systems.
@@ -551,7 +554,7 @@ Reflects the growing importance of agentic AI in real-world applications.`,
     date: "2025-10-18",
   },
   {
-    id: 15,
+    id: 16,
     title: "MambaVision V2",
     shortDescription: "Vision models using Mamba architecture for efficient image processing.",
     fullDescription: `Exploring the application of Mamba state-space models to computer vision tasks.

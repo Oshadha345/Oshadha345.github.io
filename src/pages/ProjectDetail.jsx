@@ -13,6 +13,11 @@
 
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, Github, Calendar, CheckCircle } from 'lucide-react'
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 // Components
 import SEO from '../components/common/SEO'
@@ -181,8 +186,13 @@ const ProjectDetail = () => {
               {/* Description */}
               <div>
                 <h2 className="text-white font-semibold text-lg mb-4">About This Project</h2>
-                <div className="text-gray-400 leading-relaxed whitespace-pre-line">
-                  {project.fullDescription}
+                <div className="project-markdown prose prose-invert max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm, remarkMath]}
+                    rehypePlugins={[rehypeKatex]}
+                  >
+                    {project.fullDescription}
+                  </ReactMarkdown>
                 </div>
               </div>
               
