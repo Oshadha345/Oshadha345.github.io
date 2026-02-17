@@ -153,7 +153,7 @@ const Home = () => {
       {/* FEATURED PROJECTS SECTION                                                 */}
       {/* ------------------------------------------------------------------------- */}
       
-      <section className="py-20 border-t border-white/5">
+      <section id="projects" className="relative z-20 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex items-end justify-between mb-12">
@@ -192,7 +192,7 @@ const Home = () => {
       {/* BLOG PREVIEW SECTION                                                      */}
       {/* ------------------------------------------------------------------------- */}
       
-      <section className="py-20 border-t border-white/5">
+      <section id="blog" className="relative z-20 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex items-end justify-between mb-12">
@@ -266,7 +266,7 @@ const Home = () => {
       {/* ACHIEVEMENTS PREVIEW                                                      */}
       {/* ------------------------------------------------------------------------- */}
       
-      <section className="py-20 border-t border-white/5">
+      <section id="achievements" className="relative z-20 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex items-end justify-between mb-12">

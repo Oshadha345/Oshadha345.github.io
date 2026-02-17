@@ -411,6 +411,112 @@ Demonstrated at "Let My Country Awaken 2024" exhibition, University of Peradeniy
     category: "robotics",
     date: "2024-06-01",
   },
+
+  // EE254 
+  // ...existing code...
+
+{
+  id: 999,
+  title: "Simon Says 🤖🔊",
+  slug: "simon-says-audio-classification-esp32-matlab",
+  shortDescription:
+    "Interactive Simon Says game using real-time audio classification on ESP32 hardware with MATLAB signal processing.",
+  fullDescription: `
+## Simon Says 🤖🔊
+
+Interactive Simon Says game using **real-time audio classification** on **ESP32 hardware** with **MATLAB signal processing**.
+
+### Overview
+This **completed EE254 – Digital Instrumentation** group project recreates Simon Says using **sound-based input** (snap, clap, knock) to reproduce LED sequences shown on ESP32 hardware. The system combines feature extraction with a hybrid classification pipeline to deliver accurate, low-latency sound recognition in real time.
+
+### How the Game Works
+- Watch the LED sequence on the ESP32 hardware.
+- Listen to audio feedback confirming each LED.
+- Repeat the sequence using **snap, clap, and knock** sounds.
+- Progress through **6 levels** to win.
+
+### Technical Highlights
+- **Feature extraction:** zero-crossing rate, energy analysis, spectrogram features, spectral centroid/spread.
+- **Hybrid classifier:** impulse duration filtering + energy-based snap detection + centroid-based clap/knock separation.
+- **Real-time performance:** **<100ms** classification latency, **>90%** overall accuracy.
+
+### Hardware Architecture
+- ESP32 DevKit V1 (main controller)
+- MAX4466 microphone module
+- PAM8403 amplifier (audio feedback)
+- LEDs for sequence display
+- 3.7V LiPo battery + UPS
+
+### Software Components
+- **MATLAB GUI** game app with real-time visualization, scoring, progressive levels, serial communication.
+- Console version for testing.
+- ESP32 firmware for LED control and win animations.
+
+### Tools / Stack
+- MATLAB (Signal Processing Toolbox)
+- Arduino IDE / ESP32 firmware
+- Audio analysis tools (Praat, Sonic Visualizer)
+
+### Achievements
+- Real-time audio classification
+- Robust ESP32 ↔ MATLAB integration
+- Comprehensive testing pipeline
+- Professional documentation
+
+### Figures 
+
+![MATLAB GUI game interface](/Images/Projects/Simon Says/GUI.jpg)  
+*MATLAB GUI game interface*
+
+![Hardware enclosure / game box](/Images/Projects/Simon Says/Game box.jpg)  
+*Hardware enclosure / game box*
+
+![Internal hardware layout](/Images/Projects/Simon Says/Game Box Inside hardware.jpg)  
+*Internal hardware layout*
+
+![Spectral centroid separation visualization](/Images/Projects/Simon Says/centroid.jpg)  
+*Spectral centroid separation visualization*
+
+![Time/Frequency domain analysis](/Images/Projects/Simon Says/F and T domain .jpg)  
+*Time/Frequency domain analysis*
+
+![Model accuracy results](/Images/Projects/Simon Says/accuracy of model.jpg)  
+*Model accuracy results*
+
+![Impulse duration analysis](/Images/Projects/Simon Says/impulse duration snap sample.jpg)  
+*Impulse duration analysis*
+
+
+
+### Links
+- **GitHub repo:** https://github.com/kaweesha2002/SVAIS
+- **Project page:** https://sites.google.com/view/symon-says/home
+`,
+  image: "/Images/Projects/Simon Says/GUI.jpg",
+  techStack: [
+    "MATLAB",
+    "Signal Processing Toolbox",
+    "ESP32",
+    "Arduino IDE",
+    "MAX4466",
+    "PAM8403",
+    "Praat",
+    "Sonic Visualizer"
+  ],
+  features: [
+    "Real-time audio classification",
+    "Hybrid snap/clap/knock classifier",
+    "ESP32 + MATLAB serial integration",
+    "6-level interactive gameplay",
+    "Low-latency inference (<100ms)"
+  ],
+  demoUrl: "https://sites.google.com/view/symon-says/home",
+  repoUrl: "https://github.com/kaweesha2002/SVAIS",
+  status: "completed",
+  featured: true,
+  date: "2026-02-18"
+},
+
   
   // ---------------------------------------------------------------------------
   // AI AGENTS & OTHER

@@ -72,7 +72,7 @@ const Hero = () => {
   }, [displayText, isDeleting, currentRoleIndex])
   
   return (
-    <section className="min-h-screen flex items-center pt-20 pb-10">
+    <section id="home" className="relative isolate overflow-hidden pt-28 pb-20 md:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           

@@ -6,11 +6,11 @@
 // - Social media links
 // - Quick navigation
 // - Copyright notice
-//
+// 
 // TO CUSTOMIZE:
 // - Social links are pulled from profile.js
 // - Edit the quickLinks array for footer navigation
-//
+// 
 // =============================================================================
 
 import { Link } from 'react-router-dom'
