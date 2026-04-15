@@ -59,3 +59,21 @@ export {
   getAchievementsByType,
   getAchievementsByYear
 } from './achievements'
+
+// Research Portfolio Data & Helpers
+export {
+  researchOverview,
+  researchStats,
+  researchPublications,
+  researchCompetitions,
+  researchProjects,
+  researchNews,
+  researchMedia,
+  publicationSections,
+  researchProjectIds,
+  researchExperience,
+  getResearchProjectsFromPortfolio,
+  getFeaturedResearchNews,
+  getPublicationsBySection,
+  getLinkedProjects,
+} from './research'

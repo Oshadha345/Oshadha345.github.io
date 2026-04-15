@@ -18,6 +18,7 @@ import Footer from "./components/layout/Footer";
 
 // Page Components
 import Home from "./pages/Home";
+import Research from "./pages/Research";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Blog from "./pages/Blog";
@@ -52,6 +53,7 @@ function App() {
               <Route path="/" element={<Home />} />
 
               {/* Projects Pages */}
+              <Route path="/research" element={<Research />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:slug" element={<ProjectDetail />} />
 

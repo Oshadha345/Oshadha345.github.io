@@ -12,7 +12,7 @@
 // =============================================================================
 
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Github, Calendar, CheckCircle } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Github, Calendar, CheckCircle, Microscope, ArrowUpRight } from 'lucide-react'
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -32,6 +32,50 @@ import { getProjectById, projects } from '../data'
 const ProjectDetail = () => {
   const { id, slug } = useParams()
   const navigate = useNavigate()
+
+  const markdownComponents = {
+    img: ({ node, ...props }) => {
+      const src = props.src || ''
+      if (typeof src === 'string' && src.toLowerCase().endsWith('.mp4')) {
+        return (
+          <video controls preload="metadata" className="w-full rounded-xl my-4">
+            <source src={src} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )
+      }
+      if (typeof src === 'string' && src.includes('img.shields.io')) {
+        return (
+          <img
+            {...props}
+            loading="lazy"
+            style={{
+              ...(props.style || {}),
+              display: 'inline-block',
+              margin: '0 8px 8px 0',
+              border: 'none',
+              boxShadow: 'none',
+              borderRadius: 0,
+              verticalAlign: 'middle',
+            }}
+          />
+        )
+      }
+      return <img {...props} loading="lazy" />
+    },
+    a: ({ node, ...props }) => {
+      const href = props.href || ''
+      if (typeof href === 'string' && href.toLowerCase().endsWith('.mp4')) {
+        return (
+          <video controls preload="metadata" className="w-full rounded-xl my-4">
+            <source src={href} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )
+      }
+      return <a {...props} target="_blank" rel="noopener noreferrer" />
+    },
+  }
   
   // Get project data
   const project = getProjectById(id ?? slug)
@@ -170,6 +214,35 @@ const ProjectDetail = () => {
                   </a>
                 )}
               </div>
+
+              {project.isResearch && project.researchMeta && (
+                <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-5 space-y-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+                      <Microscope size={18} className="text-blue-300" />
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.22em] text-blue-300">
+                        {project.researchMeta.label}
+                      </p>
+                      <h2 className="text-white font-semibold text-lg">{project.researchMeta.venue}</h2>
+                    </div>
+                  </div>
+                  <p className="text-gray-300">{project.researchMeta.summary}</p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-gray-300">
+                      {project.researchMeta.status}
+                    </span>
+                    <Link
+                      to="/research"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-300 hover:text-blue-200"
+                    >
+                      View research portfolio
+                      <ArrowUpRight size={15} />
+                    </Link>
+                  </div>
+                </div>
+              )}
               
               {/* Tech Stack */}
               <div>
@@ -190,6 +263,7 @@ const ProjectDetail = () => {
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm, remarkMath]}
                     rehypePlugins={[rehypeKatex]}
+                    components={markdownComponents}
                   >
                     {project.fullDescription}
                   </ReactMarkdown>

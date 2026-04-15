@@ -11,7 +11,7 @@
 //
 // =============================================================================
 
-import { ExternalLink, Award, Trophy, Medal, GraduationCap, Star, Lightbulb, Database } from 'lucide-react'
+import { ExternalLink, Award, Trophy, Medal, GraduationCap, Star, Lightbulb, Database, Brain } from 'lucide-react'
 
 // ---------------------------------------------------------------------------
 // ICON MAPPING
@@ -25,6 +25,7 @@ const iconMap = {
   Star: Star,
   Lightbulb: Lightbulb,
   Database: Database,
+  Brain: Brain,
 }
 
 // ---------------------------------------------------------------------------
@@ -49,6 +50,12 @@ const typeColors = {
     border: 'border-purple-500/30',
     text: 'text-purple-400',
     icon: 'text-purple-400',
+  },
+  research: {
+    bg: 'bg-cyan-500/20',
+    border: 'border-cyan-500/30',
+    text: 'text-cyan-400',
+    icon: 'text-cyan-400',
   },
   education: {
     bg: 'bg-green-500/20',

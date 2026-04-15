@@ -4,6 +4,46 @@
 
 export const achievements = [
   // ---------------------------------------------------------------------------
+  // RESEARCH & PUBLICATIONS (2026)
+  // ---------------------------------------------------------------------------
+  {
+    id: 15,
+    title: "IGARSS 2026 Paper Accepted",
+    organization: "IEEE International Geoscience and Remote Sensing Symposium",
+    description: "Accepted to the IGARSS 2026 proceedings for work on controlled benchmarking of visual state-space backbones under domain shift and boundary-aware analysis for remote-sensing segmentation.",
+    date: "2026-03-18",
+    type: "research",
+    icon: "Brain",
+    image: null,
+    link: null,
+    skills: ["Remote Sensing", "Vision Mamba", "Benchmarking", "Segmentation"],
+  },
+  {
+    id: 16,
+    title: "Flowmatch-PDM Selected for Final Round",
+    organization: "IEEE IES Generative AI Challenge 2026",
+    description: "Advanced to the final round with a physics-aware generative modeling concept for predictive maintenance using state-space flow matching and dynamic harmonic priors.",
+    date: "2026-02-20",
+    type: "award",
+    icon: "Trophy",
+    image: null,
+    link: null,
+    skills: ["Generative AI", "Predictive Maintenance", "Flow Matching", "SSMs"],
+  },
+  {
+    id: 17,
+    title: "BraTSMamba Submitted to BioFusion 2026",
+    organization: "EMBS Society, University of Sri Jayewardenepura",
+    description: "Completed and submitted a 3D brain tumor segmentation pipeline using state-space models for the BioFusion Biomedical DL/ML Challenge 2026.",
+    date: "2026-01-05",
+    type: "research",
+    icon: "Brain",
+    image: null,
+    link: null,
+    skills: ["Medical Imaging", "3D Segmentation", "PyTorch", "MONAI"],
+  },
+
+  // ---------------------------------------------------------------------------
   // RESEARCH & ACADEMIC (2025)
   // ---------------------------------------------------------------------------
   {

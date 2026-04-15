@@ -91,7 +91,7 @@ When I'm not coding or researching, you'll find me diving into books, participat
     gpa: "3.7/4.0",
     universityRank: "41/457",
     alRank: "98/35000+",
-    researchProjects: "2+",
+    researchProjects: "5",
     competitionsFinalist: "5+",
   },
 }
@@ -160,7 +160,7 @@ export const research = [
   },
   {
     id: 2,
-    title: "Volunteer Assistant Researcher",
+    title: "Volunteer Research Assistant",
     organization: "NIFS (National Institute of Fundamental Studies)",
     location: "Hanthana, Kandy",
     period: "October 2022 - March 2023",

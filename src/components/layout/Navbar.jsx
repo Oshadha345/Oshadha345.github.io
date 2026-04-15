@@ -16,13 +16,14 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Home, FolderOpen, Trophy, BookOpen, FileText, BookHeart } from "lucide-react";
+import { Menu, X, Home, FolderOpen, Trophy, BookOpen, FileText, BookHeart, Microscope } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Navigation items configuration
 // ---------------------------------------------------------------------------
 const navItems = [
   { name: "Home", path: "/", icon: Home },
+  { name: "Research", path: "/research", icon: Microscope },
   { name: "Projects", path: "/projects", icon: FolderOpen },
   { name: "Achievements", path: "/achievements", icon: Trophy },
   { name: "Blog", path: "/blog", icon: BookOpen },

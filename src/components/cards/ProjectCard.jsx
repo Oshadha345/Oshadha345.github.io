@@ -78,6 +78,15 @@ const ProjectCard = ({ project, featured = false }) => {
         </div>
         
         {/* Status Badge */}
+        {project.isResearch && (
+          <div className="absolute top-4 left-4">
+            <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              Research
+            </span>
+          </div>
+        )}
+
+        {/* Status Badge */}
         <div className="absolute top-4 right-4">
           <span className={`
             px-3 py-1 rounded-full text-xs font-medium
@@ -108,6 +117,15 @@ const ProjectCard = ({ project, featured = false }) => {
         <p className="text-gray-400 text-sm line-clamp-2">
           {project.shortDescription}
         </p>
+
+        {project.isResearch && project.researchMeta && (
+          <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 px-3 py-2">
+            <p className="text-xs uppercase tracking-[0.18em] text-blue-300">
+              {project.researchMeta.venue}
+            </p>
+            <p className="text-xs text-gray-400 mt-1">{project.researchMeta.status}</p>
+          </div>
+        )}
         
         {/* Tech Stack Tags */}
         <div className="flex flex-wrap gap-2">

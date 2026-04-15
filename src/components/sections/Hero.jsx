@@ -205,19 +205,19 @@ const Hero = () => {
             {/* Stat Cards under Avatar */}
             <div className="relative z-30 mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold gradient-text">3.7</div>
+                <div className="text-2xl font-bold gradient-text">{profile.stats.gpa.split('/')[0]}</div>
                 <div className="text-gray-500 text-xs">GPA/4.0</div>
               </div>
               <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold text-blue-400">98</div>
+                <div className="text-2xl font-bold text-blue-400">{profile.stats.alRank.split('/')[0]}</div>
                 <div className="text-gray-500 text-xs">A/L National Rank</div>
               </div>
               <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold text-purple-400">5+</div>
+                <div className="text-2xl font-bold text-purple-400">{profile.stats.competitionsFinalist}</div>
                 <div className="text-gray-500 text-xs">CP Finals</div>
               </div>
               <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold text-green-400">2+</div>
+                <div className="text-2xl font-bold text-green-400">{profile.stats.researchProjects}</div>
                 <div className="text-gray-500 text-xs">Research Projects</div>
               </div>
             </div>
