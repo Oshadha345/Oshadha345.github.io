@@ -7,7 +7,8 @@ export default function Home() {
   return <><SEO /><div className="shell page">
     <section className="hero">
       <div className="portrait-wrap glass"><img src="/images/avatars/avatar.png" alt="Oshadha Samarakoon" /><span className="portrait-glow" /></div>
-      <div className="hero-copy"><div className="availability"><i /> Open to PhD and research internship opportunities</div><span className="eyebrow">{profile.role}</span><h1>Oshadha<br /><span>Samarakoon</span></h1><p className="lead">{profile.bio}</p><p className="affiliation">{profile.affiliation}</p>
+      # PhD and 
+      <div className="hero-copy"><div className="availability"><i /> Open to  research internship opportunities</div><span className="eyebrow">{profile.role}</span><h1>Oshadha<br /><span>Samarakoon</span></h1><p className="lead">{profile.bio}</p><p className="affiliation">{profile.affiliation}</p>
         <div className="hero-actions"><Link className="button primary" to="/research">Explore research</Link><a className="button glass" href={profile.cv} target="_blank" rel="noreferrer">Download CV ↓</a></div>
         <TextLinks links={[...profile.links, ["Email", `mailto:${profile.email}`]]} />
       </div>
