@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# folder
+new_items
+new_items/blogs/EEES Magazine 2026/EEES Magazine 2026.pdf
