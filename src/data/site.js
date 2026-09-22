@@ -45,20 +45,20 @@ export const manuscripts = [
   },
   {
     title: "ORBIT-Mamba: A State-Space Architecture for Remote-Sensing Change Detection",
-    authors: "O. Samarakoon, R. Godaliyadda, et al.",
+    authors: "D. Perera, O. Samarakoon, T. Firdous, R. Godaliyadda, et al.",
     venue: "Manuscript in preparation · Target: IEEE TGRS",
-    description: "A visual state-space project for remote-sensing change detection.",
+    description: "A Dineth Perera-led visual state-space project for remote-sensing change detection, with O. Samarakoon contributing as a co-author.",
     links: [],
   },
 ];
 
 export const experience = [
-  { period: "Aug 2025–present", title: "Undergraduate Researcher", place: "Multidisciplinary AI Research Centre (MARC), University of Peradeniya", supervisor: "Supervisor: Prof. Roshan Godaliyadda", description: "Visual state-space models, remote-sensing segmentation and change detection, and multimodal solar-irradiance forecasting. I lead architecture design, training, and experiments for ORBIT-Mamba and SolarMamba, and contributed to three accepted conference papers." },
+  { period: "Aug 2025–present", title: "Undergraduate Researcher", place: "Multidisciplinary AI Research Centre (MARC), University of Peradeniya", supervisor: "Supervisor: Prof. Roshan Godaliyadda", description: "Visual state-space models, remote-sensing segmentation and change detection, and multimodal solar-irradiance forecasting. I lead architecture design, training, and experiments for SolarMamba, contribute to Dineth Perera-led ORBIT-Mamba as a co-author, and contributed to three accepted conference papers." },
   { period: "Oct 2022–Mar 2023", title: "Volunteer Assistant Researcher", place: "National Institute of Fundamental Studies (NIFS)", supervisor: "Supervisor: Prof. G. R. A. Kumara", description: "Studied supercapacitor performance using activated carbon through device fabrication, analysis in Origin, and literature review." },
 ];
 
 export const education = [
-  { period: "Mar 2023–Jun 2028 (expected)", title: "B.Sc. Engineering (Honours), Electrical & Electronic Engineering", place: "University of Peradeniya", description: "Second- and third-year CGPA: 3.38/4.00. First-year General Engineering: GPA 3.7545/4.00, rank 41/457; assessed separately from the specialization years." },
+  { period: "Mar 2023–Jun 2028 (expected)", title: "B.Sc. Engineering (Honours), Electrical & Electronic Engineering", place: "University of Peradeniya", description: "Second- and third-year CGPA: 3.504/4.00. First-year General Engineering: GPA 3.7545/4.00, rank 41/457; assessed separately from the specialization years." },
   { period: "Mar 2022", title: "G.C.E. Advanced Level · Physical Science", place: "Combined Mathematics, Physics, Chemistry", description: "3 A passes; 5th in Kandy District and 98th islandwide (Z-score 2.5756). Best result in school history." },
   { period: "Dec 2018", title: "G.C.E. Ordinary Level", place: "", description: "9 A passes." },
 ];
@@ -72,7 +72,7 @@ export const educationInstitutions = [
     specialization: "Electrical & Electronic Engineering",
     note: "The first-year General Engineering GPA and rank are assessed separately from the specialization-year CGPA.",
     metrics: [
-      ["Second- and third-year CGPA", "3.38/4.00"],
+      ["Second- and third-year CGPA", "3.504/4.00"],
       ["First-year General Engineering GPA", "3.7545/4.00"],
       ["First-year rank", "41/457"],
     ],
@@ -103,7 +103,7 @@ export const educationInstitutions = [
 
 export const researchProjects = [
   { id: 1, title: "SolarMamba", period: "Oct 2025–present", category: "Multimodal forecasting", description: "Multimodal solar-irradiance nowcasting. Manuscript in preparation for Applied Energy.", details: "An ongoing MARC research project on short-term solar-irradiance nowcasting from sky imagery and weather observations. Public information is limited while the manuscript is in preparation.", tags: ["Forecasting", "Vision", "State-space models"], links: [["Code", "https://github.com/Oshadha345/SolarMamba"]] },
-  { id: 23, title: "ORBIT-Mamba", period: "Mar 2026–present", category: "Remote sensing", description: "A visual state-space project for remote-sensing change detection. Manuscript in preparation for IEEE TGRS.", details: "An ongoing MARC research project in remote-sensing change detection. Public information is limited while the manuscript is in preparation.", tags: ["Remote sensing", "Change detection", "State-space models"], links: [] },
+  { id: 23, title: "ORBIT-Mamba", period: "Mar 2026–present", category: "Remote sensing", description: "A Dineth Perera-led visual state-space project for remote-sensing change detection. I contribute as a co-author; the manuscript is in preparation for IEEE TGRS.", details: "An ongoing MARC research project led by Dineth Perera. I contribute to the remote-sensing change-detection work as a co-author. Public information is limited while the manuscript is in preparation.", tags: ["Remote sensing", "Change detection", "State-space models"], links: [] },
   { id: 19, title: "Image Encoders", period: "Ongoing", category: "Vision systems", image: "/images/projects/image_encoder/Vcoder.png", description: "Controlled implementations and experiments across CNN, Vision Transformer, and Mamba/SSM encoders.", details: "A controlled study of modern vision backbones, focused on feature extraction, architectural behavior, and computational trade-offs.", tags: ["CNN", "ViT", "Mamba", "PyTorch"], links: [["Code", "https://github.com/Oshadha345/Image-Encoders/"]] },
   { id: 2, title: "BraTSMamba", period: "Dec 2025–Mar 2026", category: "Biomedical vision", image: "/images/projects/BraTSMamba/BraTSMamba.png", description: "3D brain-tumor segmentation on BraTS 2021 for the BioFusion Biomedical Deep Learning Hackathon.", details: "I led the research team with equal contribution from D. Perera. The project studies a linear-complexity Mamba backbone for full-resolution multimodal MRI and BraTS 2021 Task 1 sub-region segmentation.", tags: ["3D segmentation", "MRI", "Mamba", "MONAI"], links: [["Code", "https://github.com/Oshadha345/BraTSMamba"], ["Report", "/evidence/bratsmamba-biofusion-report.pdf"]] },
   { id: 20, title: "PatchFlow-PdM", period: "Jan–May 2026", category: "Generative modelling", description: "Synthetic fault-data generation for the IEEE IES Generative AI Challenge 2026.", details: "Team Astra advanced through Milestone 3, and the manuscript was recommended for IRAI 2026. I led research formulation, training, methodology writing, and scientific figures.", tags: ["Predictive maintenance", "Generative models", "Research challenge"], links: [] },
