@@ -25,13 +25,13 @@ export const publications = [
     venue: "MERCon 2026",
     title: "MambaRefine-CD: MambaVision with Region–Boundary Temporal Refinement",
     authors: "D. Perera, T. Firdous, O. Samarakoon, R. Godaliyadda, P. Ekanayake, V. Herath",
-    links: [["Paper", "https://arxiv.org/abs/2607.04403"], ["Code", "https://github.com/Dineth14/MambaRefine-CD"], ["Models", "https://huggingface.co/dineth18/MambaRefine-CD"]],
+    links: [["Paper", "https://arxiv.org/abs/2607.04403"], ["DOI", "https://doi.org/10.1109/MERCon71835.2026.11691356"], ["Code", "https://github.com/Dineth14/MambaRefine-CD"], ["Models", "https://huggingface.co/dineth18/MambaRefine-CD"]],
   },
   {
     venue: "MERCon 2026",
     title: "A Controlled Visual-Backbone Benchmark for Multimodal Short-Term Solar Irradiance Forecasting",
     authors: "O. Samarakoon, Dilshara Herath, I. Ranmandala, Dushan Herath, R. Godaliyadda, P. Ekanayake, V. Herath",
-    links: [["Paper", "https://arxiv.org/abs/2607.23633"], ["Code", "https://github.com/Oshadha345/irradiance_benchmark"], ["Project", "https://oshadha345.github.io/irradiance_benchmark/"], ["Models", "https://huggingface.co/OoshadhaSam/solar-irradiance-visual-backbone-benchmark"]],
+    links: [["Paper", "https://arxiv.org/abs/2607.23633"], ["DOI", "https://doi.org/10.1109/MERCon71835.2026.11691562"], ["Code", "https://github.com/Oshadha345/irradiance_benchmark"], ["Project", "https://oshadha345.github.io/irradiance_benchmark/"], ["Models", "https://huggingface.co/OoshadhaSam/solar-irradiance-visual-backbone-benchmark"]],
   },
 ];
 
