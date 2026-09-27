@@ -1,5 +1,7 @@
 // Fields set to null / [] and marked TODO(content) are listed in CONTENT-TODO.md; the UI hides them until filled.
 
+import cvVersion from "./cv-version.json" with { type: "json" };
+
 export const SITE_URL = "https://oshadha345.github.io";
 
 export const profile = {
@@ -20,7 +22,7 @@ export const profile = {
   researchStatement: [], // TODO(content): 2–3 short paragraphs
   longBio: [], // TODO(content): longer bio for About
   email: "e21345@eng.pdn.ac.lk",
-  cv: "/cv/oshadha-samarakoon-cv.pdf",
+  cv: `/cv/oshadha-samarakoon-cv.pdf?v=${cvVersion.hash}`,
   portrait: "/media/profile/portrait.webp",
   scholar: "https://scholar.google.com/citations?user=9lirV1kAAAAJ",
   links: [

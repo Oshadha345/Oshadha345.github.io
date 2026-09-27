@@ -1,4 +1,5 @@
-import { readdir, stat, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { readFile, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -64,3 +65,8 @@ for (const file of await walk(root)) {
 const sorted = Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b)));
 await writeFile("src/data/media-manifest.json", JSON.stringify(sorted).replace(/,"/g, ',\n"') + "\n");
 console.log(`optimize-images: ${converted} converted, ${Object.keys(sorted).length} media files indexed`);
+
+// A content hash on the CV link makes browsers fetch the new file whenever the PDF changes.
+const cvHash = createHash("sha256").update(await readFile("public/cv/oshadha-samarakoon-cv.pdf")).digest("hex").slice(0, 10);
+await writeFile("src/data/cv-version.json", JSON.stringify({ hash: cvHash }) + "\n");
+console.log(`optimize-images: CV version ${cvHash}`);
