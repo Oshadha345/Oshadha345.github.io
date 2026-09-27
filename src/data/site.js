@@ -142,6 +142,11 @@ export const experience = [
   { period: "Oct 2022–Mar 2023", title: "Volunteer Assistant Researcher", place: "National Institute of Fundamental Studies (NIFS)", supervisor: "Supervisor: Prof. G. R. A. Kumara", description: "Studied supercapacitor performance using activated carbon through device fabrication, analysis in Origin, and literature review.", album: "nifs-research-volunteer" },
 ];
 
+// Evidence sits next to the claim it proves. category drives the About archive grouping.
+const pdf = (slug, category, detail, { type = "certificate", label = "Certificate" } = {}) => ({ type, label, category, detail, slug, file: `/evidence/${slug}.pdf`, preview: `/media/evidence/${slug}.webp` });
+const image = (slug, type, label, category, detail) => ({ type, label, category, detail, slug, file: `/media/evidence/${slug}.webp`, preview: `/media/evidence/${slug}.webp` });
+const photos = (album) => ({ type: "photos", label: "Photos", album });
+
 export const education = {
   university: {
     period: "Mar 2023–Jun 2028 (expected)",
@@ -154,7 +159,16 @@ export const education = {
       ["First-year General Engineering GPA", "3.7545/4.00"],
     ],
   },
-  school: "G.C.E. A/L 2022: 3A, 5th in Kandy District, 98th islandwide.",
+  school: {
+    period: "2008–2022",
+    institution: "Sri Chandananda Buddhist College, Kandy",
+    logo: "/media/education/sri-chandananda-buddhist-college.webp",
+    program: "Primary and Secondary Education",
+    exams: [
+      { date: "Mar 2022", title: "G.C.E. Advanced Level Examination", subtitle: "Physical Science · Combined Mathematics, Physics, and Chemistry", summary: "3 A passes; 5th in Kandy District and 98th islandwide (Z-score 2.5756).", note: "Best result in school history.", evidence: [pdf("advanced-level-certificate", "academic", "2022 · Official examination certificate")] },
+      { date: "Dec 2018", title: "G.C.E. Ordinary Level Examination", summary: "9 A passes.", evidence: [pdf("ordinary-level-certificate", "academic", "2018 · Official examination certificate")] },
+    ],
+  },
 };
 
 const researchProjectList = [
@@ -192,18 +206,23 @@ export const otherProjects = [
 ];
 
 export const awards = [
-  { year: "2025/26", title: "ICPC Sri Lanka Regional Finals", result: "Top 15 team finish", top: true },
-  { year: "2024", title: "IEEEXtreme 18.0", result: "Global top 900 · Sri Lanka top 100", top: true, album: "ieeextreme-18-bittopia" },
-  { year: "2025", title: "MoraXtreme 10.0", result: "Finalist among 150 teams · Team Nocturnals · elimination rank 11", top: true },
-  { year: "2025", title: "CodeArena", result: "3rd in selection · Top 20 of 150 finalist", top: true },
-  { year: "2025", title: "HaXtreme 4.0", result: "5th in the Non-AI round · 8th overall after the Non-AI and AI rounds", top: true, album: "haxtreme-4" },
-  { year: "2025", title: "UOJ Coders 4.0", result: "Top 15 finalist", album: "uoj-coders-4" },
+  { year: "2025/26", title: "ICPC Sri Lanka Regional Finals", result: "Top 15 team finish", top: true, evidence: [pdf("icpc-finalist", "placement", "2025/26 · Finalist")] },
+  { year: "2024", title: "IEEEXtreme 18.0", result: "Global top 900 · Sri Lanka top 100", top: true, evidence: [pdf("ieeextreme-18-certificate", "participation", "2024 · Participation certificate"), photos("ieeextreme-18-bittopia")] },
+  { year: "2025", title: "MoraXtreme 10.0", result: "Finalist among 150 teams · Team Nocturnals · elimination rank 11", top: true, evidence: [
+    pdf("moraxtreme-10-certificate", "placement", "2025 · Finalist certificate"),
+    image("moraxtreme-10-finalist-poster", "flyer", "Finalist flyer", "placement", "2025 · Finalist announcement"),
+    image("moraxtreme-10-ranking", "ranking", "Ranking", "placement", "2025 · Elimination round, rank 11"),
+  ] },
+  { year: "2025", title: "CodeArena", result: "3rd in selection · Top 20 of 150 finalist", top: true, evidence: [pdf("codearena-finalist", "placement", "2025 · Finalist certificate")] },
+  { year: "2025", title: "HaXtreme 4.0", result: "5th in the Non-AI round · 8th overall after the Non-AI and AI rounds", top: true, evidence: [pdf("haxtreme-4-finalist", "placement", "2025 · 5th in Non-AI round, 8th overall", { type: "ranking", label: "Results" }), photos("haxtreme-4")] },
+  { year: "2025", title: "UOJ Coders 4.0", result: "Top 15 finalist", evidence: [pdf("uoj-coders-4-finalist", "placement", "2025 · Finalist certificate"), photos("uoj-coders-4")] },
   { year: "2025", title: "CodeRally", result: "2nd place, Beginner Tier selection · finalist" },
-  { year: "2024", title: "Coders V11", result: "42nd place · national competition, qualified through PreCoders V11", album: "coders-v11" },
-  { year: "2024", title: "PreCoders V11", result: "1st place team · UoP intra-university selection for Coders V11", album: "coders-v11" },
-  { year: "2023", title: "Coders V10", result: "Finalist · national competition, qualified through PreCoders V10", album: "coders-v10" },
-  { year: "2023", title: "PreCoders V10", result: "Top 25 · UoP intra-university selection for Coders V10", album: "coders-v10" },
-  { year: "2025", title: "IEEEXtreme 19.0", result: "Participant · Team AlgorithmAvengersF2O", participant: true },
+  { year: "2024", title: "Coders V11", result: "42nd place · national competition, qualified through PreCoders V11", evidence: [photos("coders-v11")] },
+  { year: "2024", title: "PreCoders V11", result: "1st place team · UoP intra-university selection for Coders V11", evidence: [pdf("precoders-coders-v11", "placement", "2024 · PreCoders V11 and Coders V11 results", { type: "ranking", label: "Results" }), photos("coders-v11")] },
+  { year: "2023", title: "Coders V10", result: "Finalist · national competition, qualified through PreCoders V10", evidence: [photos("coders-v10")] },
+  { year: "2023", title: "PreCoders V10", result: "Top 25 · UoP intra-university selection for Coders V10", evidence: [photos("coders-v10")] },
+  { year: "2025", title: "IEEEXtreme 19.0", result: "Participant · Team AlgorithmAvengersF2O", participant: true, evidence: [pdf("ieeextreme-19-certificate", "participation", "2025 · Participation certificate")] },
+  { year: "2024", title: "MoraXtreme 9.0", result: "Participant · Team Algorithm Avengers", participant: true, evidence: [image("moraxtreme-9-certificate", "certificate", "Certificate", "participation", "2024 · Participation certificate")] },
 ];
 
 export const writing = [
@@ -230,6 +249,22 @@ export const books = [
     ["Ideas I am keeping", "Self-reference is not just a logical curiosity. Hofstadter uses it to connect Gödel’s incompleteness theorems, Escher’s recursive images, Bach’s musical structures, and the idea of a self. The useful part for my own work is the insistence on separating a formal mechanism from the interpretation we place on it."],
   ] },
 ];
+
+const evidenceSource = [
+  ...awards.map((award) => ({ title: award.title, evidence: award.evidence })),
+  ...education.school.exams.map((exam) => ({ title: exam.title, evidence: exam.evidence })),
+];
+
+export const albumForAward = (award) => award.evidence?.find((item) => item.type === "photos")?.album;
+
+// Document evidence for the About archive: one entry per file, newest first within each category.
+export const evidenceArchive = evidenceSource
+  .flatMap(({ title, evidence = [] }) => evidence.filter((item) => item.file && !item.needsRedaction).map((item) => ({ ...item, title })))
+  .sort((a, b) => Number(b.detail.slice(0, 4)) - Number(a.detail.slice(0, 4)));
+
+// The first document proving the award an album belongs to (for "Certificate →" in the gallery).
+export const albumEvidence = (albumSlug) =>
+  awards.filter((award) => albumForAward(award) === albumSlug).flatMap((award) => award.evidence.filter((item) => item.file && !item.needsRedaction))[0];
 
 export const allProjects = [...researchProjects, ...engineeringProjects, ...otherProjects];
 export const getProject = (key) => allProjects.find((project) => project.slug === String(key) || String(project.id) === String(key));

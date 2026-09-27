@@ -1,10 +1,9 @@
 // Album facts come from new_items/gallery/<album>/info.md; conflicts and gaps are listed in CONTENT-TODO.md.
 
-const photo = (album, file, alt, focus) => ({
+const photo = (album, file, alt) => ({
   src: `/media/gallery/${album}/${file}.webp`,
   full: `/media/gallery/${album}/${file}@2x.webp`,
   alt,
-  focus,
 });
 
 export const categories = [
@@ -26,10 +25,10 @@ export const albums = [
     relatedLabel: "Papers →",
     papers: ["mercon26-solar-benchmark", "mercon26-mambarefine-cd"],
     photos: [
-      photo("mercon-2026", "01-solar-poster-presentation", "Poster presentation of the solar-irradiance visual-backbone benchmark at MERCon 2026", "center 40%"),
-      photo("mercon-2026", "02-mambarefine-poster-presentation", "The MambaRefine-CD poster on its stand at MERCon 2026", "center 45%"),
-      photo("mercon-2026", "03-solar-poster", "MERCon 2026 poster: A Controlled Visual-Backbone Benchmark for Multimodal Short-Term Solar Irradiance Forecasting", "center top"),
-      photo("mercon-2026", "04-mambarefine-poster", "MERCon 2026 poster: MambaRefine-CD, MambaVision with Region–Boundary Temporal Refinement", "center top"),
+      photo("mercon-2026", "01-solar-poster-presentation", "Poster presentation of the solar-irradiance visual-backbone benchmark at MERCon 2026"),
+      photo("mercon-2026", "02-mambarefine-poster-presentation", "The MambaRefine-CD poster on its stand at MERCon 2026"),
+      photo("mercon-2026", "03-solar-poster", "MERCon 2026 poster: A Controlled Visual-Backbone Benchmark for Multimodal Short-Term Solar Irradiance Forecasting"),
+      photo("mercon-2026", "04-mambarefine-poster", "MERCon 2026 poster: MambaRefine-CD, MambaVision with Region–Boundary Temporal Refinement"),
     ],
   },
   {
@@ -44,7 +43,7 @@ export const albums = [
     relatedLabel: "Paper →",
     papers: ["igarss26-vssm-benchmark"],
     photos: [
-      photo("igarss-2026", "01-poster-board", "The visual state-space backbone benchmark poster on a board in the IGARSS 2026 poster hall", "center 40%"),
+      photo("igarss-2026", "01-poster-board", "The visual state-space backbone benchmark poster on a board in the IGARSS 2026 poster hall"),
       photo("igarss-2026", "02-poster-row", "A row of poster boards at IGARSS 2026 with the benchmark poster on the left"),
       photo("igarss-2026", "03-venue-signage", "IGARSS 2026 room signage for the Lincoln, Jefferson, Georgetown and Monroe rooms (photo: Jason Dixson Photography)"),
       photo("igarss-2026", "04-poster-hall", "Attendees walking between poster boards in the IGARSS 2026 hall"),
@@ -65,12 +64,12 @@ export const albums = [
     relatedHref: "/about#honors",
     relatedLabel: "Award →",
     photos: [
-      photo("haxtreme-4", "01-award", "Team receiving a certificate on stage at HaXtreme 4.0", "center 45%"),
+      photo("haxtreme-4", "01-award", "Team receiving a certificate on stage at HaXtreme 4.0"),
       photo("haxtreme-4", "02-team", "Team members competing at computers during HaXtreme 4.0"),
-      photo("haxtreme-4", "03-competing", "Oshadha Samarakoon working at a computer during HaXtreme 4.0", "center 30%"),
-      photo("haxtreme-4", "04-final-leaderboard", "HaXtreme 4.0 final leaderboard with team nocturnals in 8th place", "center top"),
-      photo("haxtreme-4", "05-round-one-leaderboard", "HaXtreme 4.0 leaderboard at the end of the first round with nocturnals in 5th place", "center top"),
-      photo("haxtreme-4", "06-top-30", "HaXtreme 4.0 elimination-round finalists, the top 30 teams", "center top"),
+      photo("haxtreme-4", "03-competing", "Oshadha Samarakoon working at a computer during HaXtreme 4.0"),
+      photo("haxtreme-4", "04-final-leaderboard", "HaXtreme 4.0 final leaderboard with team nocturnals in 8th place"),
+      photo("haxtreme-4", "05-round-one-leaderboard", "HaXtreme 4.0 leaderboard at the end of the first round with nocturnals in 5th place"),
+      photo("haxtreme-4", "06-top-30", "HaXtreme 4.0 elimination-round finalists, the top 30 teams"),
     ],
   },
   {
@@ -84,10 +83,10 @@ export const albums = [
     relatedHref: "/projects/omni-wheel-robot",
     relatedLabel: "Project →",
     photos: [
-      photo("engex-2025", "01-omni-robot", "The yellow omni-wheel autonomous robot on artificial grass", "center 60%"),
-      photo("engex-2025", "02-team", "The project team standing with the omni-wheel robot at EngEx 2025", "center 40%"),
-      photo("engex-2025", "03-omni-robot-2", "Front view of the omni-wheel robot showing its mecanum-style wheels", "center 60%"),
-      photo("engex-2025", "04-omni-robot-3", "Top-down view of the omni-wheel robot", "center 55%"),
+      photo("engex-2025", "01-omni-robot", "The yellow omni-wheel autonomous robot on artificial grass"),
+      photo("engex-2025", "02-team", "The project team standing with the omni-wheel robot at EngEx 2025"),
+      photo("engex-2025", "03-omni-robot-2", "Front view of the omni-wheel robot showing its mecanum-style wheels"),
+      photo("engex-2025", "04-omni-robot-3", "Top-down view of the omni-wheel robot"),
     ],
   },
   {
@@ -101,7 +100,7 @@ export const albums = [
     relatedHref: "/about#honors",
     relatedLabel: "Award →",
     photos: [
-      photo("uoj-coders-4", "01-finalists", "Team photo in front of the UoJ Coders V4.0 grand-finale backdrop", "center 45%"),
+      photo("uoj-coders-4", "01-finalists", "Team photo in front of the UoJ Coders V4.0 grand-finale backdrop"),
       photo("uoj-coders-4", "02-before-competition", "Sunset over the water during the stay before the competition"),
       photo("uoj-coders-4", "03-before-competition-2", "The sun low over the sea before the competition"),
     ],
@@ -117,10 +116,10 @@ export const albums = [
     relatedHref: "/about#honors",
     relatedLabel: "Award →",
     photos: [
-      photo("ieeextreme-18-bittopia", "01-group", "Participants in a group photo at BITTOPIA 2.0", "center 45%"),
+      photo("ieeextreme-18-bittopia", "01-group", "Participants in a group photo at BITTOPIA 2.0"),
       photo("ieeextreme-18-bittopia", "02-team", "Team coding at laptops during IEEEXtreme 18.0 at BITTOPIA 2.0"),
       photo("ieeextreme-18-bittopia", "03-coding", "Oshadha Samarakoon coding at a laptop during the 24-hour IEEEXtreme 18.0 contest"),
-      photo("ieeextreme-18-bittopia", "04-event-poster", "BITTOPIA 2.0 event poster announcing the successful conclusion of the coding arcade", "center 40%"),
+      photo("ieeextreme-18-bittopia", "04-event-poster", "BITTOPIA 2.0 event poster announcing the successful conclusion of the coding arcade"),
     ],
   },
   {
@@ -134,13 +133,13 @@ export const albums = [
     relatedHref: "/about#honors",
     relatedLabel: "Award →",
     photos: [
-      photo("coders-v11", "01-team", "Team of three in front of the ACES Coders V11.0 sponsor backdrop", "center 40%"),
-      photo("coders-v11", "02-team-2", "Team members at laptops during ACES Coders V11.0", "center 40%"),
-      photo("coders-v11", "03-photo-frame", "Team posing with a social-media photo frame at ACES Coders V11.0", "center 40%"),
-      photo("coders-v11", "04-group", "Group photo in front of the ACES Coders V11.0 backdrop", "center 40%"),
-      photo("coders-v11", "05-precoders-team", "Team working on laptops during PreCoders V11.0", "center 40%"),
-      photo("coders-v11", "06-precoders", "Team discussing a problem during PreCoders V11.0", "center 40%"),
-      photo("coders-v11", "07-precoders-group", "Group photo of PreCoders V11.0 participants", "center 45%"),
+      photo("coders-v11", "01-team", "Team of three in front of the ACES Coders V11.0 sponsor backdrop"),
+      photo("coders-v11", "02-team-2", "Team members at laptops during ACES Coders V11.0"),
+      photo("coders-v11", "03-photo-frame", "Team posing with a social-media photo frame at ACES Coders V11.0"),
+      photo("coders-v11", "04-group", "Group photo in front of the ACES Coders V11.0 backdrop"),
+      photo("coders-v11", "05-precoders-team", "Team working on laptops during PreCoders V11.0"),
+      photo("coders-v11", "06-precoders", "Team discussing a problem during PreCoders V11.0"),
+      photo("coders-v11", "07-precoders-group", "Group photo of PreCoders V11.0 participants"),
     ],
   },
   {
@@ -154,9 +153,9 @@ export const albums = [
     relatedHref: "/about#honors",
     relatedLabel: "Award →",
     photos: [
-      photo("coders-v10", "01-coders-v10", "Team working on laptops during ACES Coders V10.0", "center 40%"),
-      photo("coders-v10", "02-precoders-v10", "Team at laptops during ACES PreCoders V10.0", "center 40%"),
-      photo("coders-v10", "03-team", "Selfie of the team at the Coders V10 venue", "center 40%"),
+      photo("coders-v10", "01-coders-v10", "Team working on laptops during ACES Coders V10.0"),
+      photo("coders-v10", "02-precoders-v10", "Team at laptops during ACES PreCoders V10.0"),
+      photo("coders-v10", "03-team", "Selfie of the team at the Coders V10 venue"),
       photo("coders-v10", "04-setup", "Laptop, headphones and participant cards set up for Coders V10"),
     ],
   },
@@ -171,9 +170,9 @@ export const albums = [
     relatedHref: "/research#experience",
     relatedLabel: "Experience →",
     photos: [
-      photo("nifs-research-volunteer", "01-fabrication", "Fabricating a supercapacitor at a laboratory bench", "center 45%"),
-      photo("nifs-research-volunteer", "02-lab-collage", "Collage of laboratory work and group photos at NIFS", "center 30%"),
-      photo("nifs-research-volunteer", "03-device-inspection", "Device inspection using a scanning electron microscope, and supercapacitor samples", "center 30%"),
+      photo("nifs-research-volunteer", "01-fabrication", "Fabricating a supercapacitor at a laboratory bench"),
+      photo("nifs-research-volunteer", "02-lab-collage", "Collage of laboratory work and group photos at NIFS"),
+      photo("nifs-research-volunteer", "03-device-inspection", "Device inspection using a scanning electron microscope, and supercapacitor samples"),
     ],
   },
 ];

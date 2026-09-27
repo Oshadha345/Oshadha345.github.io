@@ -6,6 +6,22 @@ import { FilterChips, PageHeader, Section, useFilterParam } from "../components/
 import { areas, getArea, manuscripts, profile, publications, venues } from "../data/site";
 import { hasMedia } from "../lib/media";
 
+// Repeat the logos until one pass is wide enough to scroll, then render it twice for a seamless loop.
+function VenueStrip({ logos }) {
+  const pass = Array.from({ length: Math.max(1, Math.ceil(6 / logos.length)) }, () => logos).flat();
+  return (
+    <div className="venue-strip" role="region" aria-label="Publication venues">
+      <ul className="venue-track" style={{ "--venue-duration": `${pass.length * 8}s` }}>
+        {[...pass, ...pass].map((venue, i) => (
+          <li key={i} aria-hidden={i >= logos.length ? "true" : undefined}>
+            <Img src={venue.logo} alt={i < logos.length ? venue.name : ""} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function Publications() {
   const areaIds = areas.map((area) => area.id);
   const [area, setArea] = useFilterParam("area", areaIds);
@@ -21,11 +37,7 @@ export default function Publications() {
         <PageHeader
           kicker="Research output"
           title="Publications"
-          aside={logos.length > 0 && (
-            <ul className="venue-row" aria-label="Venues">
-              {logos.map((venue) => <li key={venue.name}><Img src={venue.logo} alt={venue.name} /></li>)}
-            </ul>
-          )}
+          aside={logos.length > 0 && <VenueStrip logos={logos} />}
         >
           Peer-reviewed papers in visual state-space models, remote sensing, and multimodal forecasting. <a href={profile.scholar} target="_blank" rel="noreferrer">Google Scholar</a>
         </PageHeader>

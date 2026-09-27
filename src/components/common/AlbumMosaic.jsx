@@ -1,115 +1,179 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useLightbox } from "./Lightbox";
 import { SmartLink } from "./SiteBlocks";
 import { mediaSize } from "../../lib/media";
+import { albumEvidence } from "../../data/site";
 
-const MOSAIC_SIZES = "(min-width: 1024px) 560px, (min-width: 640px) 66vw, 100vw";
+const MIN_ASPECT = 0.62;
+const MAX_ASPECT = 2.2;
+const SHORT_ROW = 1.4;
+
+const targetHeight = (width) => (width >= 900 ? 250 : width >= 600 ? 200 : 150);
+const textAspect = (width) => (width >= 900 ? 1.5 : 1.25);
+const clamp = (a) => Math.min(MAX_ASPECT, Math.max(MIN_ASPECT, a));
+
+function useContainerWidth() {
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+  useLayoutEffect(() => {
+    const node = ref.current;
+    setWidth(Math.round(node.clientWidth));
+    let timer;
+    const observer = new ResizeObserver(([entry]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const next = Math.round(entry.contentRect.width);
+        setWidth((prev) => (Math.abs(prev - next) >= 1 ? next : prev));
+      }, 120);
+    });
+    observer.observe(node);
+    return () => { clearTimeout(timer); observer.disconnect(); };
+  }, []);
+  return [ref, width];
+}
+
+const rowHeight = (tiles, width) => width / tiles.reduce((s, t) => s + t.a, 0);
+
+// Greedy fill: close a row as soon as the height that exactly fills the width drops to the target.
+function greedyBreaks(tiles, width, target) {
+  const starts = [0];
+  let sum = 0;
+  tiles.forEach((tile, i) => {
+    sum += tile.a;
+    if (width / sum <= target && i < tiles.length - 1) { starts.push(i + 1); sum = 0; }
+  });
+  return starts;
+}
+
+// Choose row breaks that keep every row (including the last) as close to the target height as possible.
+function justify(tiles, width, target) {
+  const n = tiles.length;
+  const best = [0, ...Array(n).fill(Infinity)];
+  const from = Array(n + 1).fill(0);
+  for (let j = 1; j <= n; j++) {
+    let sum = 0;
+    for (let i = j - 1; i >= 0 && j - i <= 8; i--) {
+      sum += tiles[i].a;
+      const h = width / sum;
+      const cost = best[i] + ((h - target) / target) ** 2 + (h < target * 0.55 || h > target * SHORT_ROW ? 10 : 0);
+      if (cost < best[j]) { best[j] = cost; from[j] = i; }
+    }
+  }
+  const rows = [];
+  for (let j = n; j > 0; j = from[j]) {
+    const slice = tiles.slice(from[j], j);
+    rows.unshift({ tiles: slice, h: rowHeight(slice, width), full: true });
+  }
+  return rows;
+}
+
+// Too few photos to fill even one row: keep the target height and let the text tile absorb the leftover width.
+function settleShortRows(rows, target) {
+  for (const row of rows) {
+    if (row.h <= target * SHORT_ROW) continue;
+    row.h = target;
+    const text = row.tiles.find((t) => t.kind === "text");
+    if (text) text.fill = true;
+    else row.full = false;
+  }
+  return rows;
+}
+
+function buildLayout(photos, width, recipe) {
+  const target = targetHeight(width);
+  const text = { kind: "text", a: textAspect(width) };
+  if (width < 600) return { rows: settleShortRows(justify(photos, width, target), target), textPlacement: "top" };
+  if (recipe === 3) {
+    const rows = justify(photos, width, target);
+    if (rows.length === 1 && rows[0].h > target * SHORT_ROW) return { rows: settleShortRows(justify([...photos, text], width, target), target), textPlacement: "inline" };
+    return { rows: settleShortRows(rows, target), textPlacement: "bar" };
+  }
+  const starts = greedyBreaks(photos, width, target);
+  const at = recipe === 0 ? 0 : recipe === 1 ? (starts[1] ?? photos.length) : starts[starts.length - 1];
+  const sequence = [...photos.slice(0, at), text, ...photos.slice(at)];
+  return { rows: settleShortRows(justify(sequence, width, target), target), textPlacement: "inline" };
+}
+
+function tileWidths(row, width) {
+  const widths = row.tiles.map((t) => Math.round(t.a * row.h));
+  const fill = row.tiles.findIndex((t) => t.fill);
+  if (fill >= 0) {
+    const others = widths.reduce((s, w, i) => (i === fill ? s : s + w), 0);
+    widths[fill] = Math.max(0, width - others);
+  } else if (row.full) {
+    widths[widths.length - 1] += width - widths.reduce((s, w) => s + w, 0);
+  }
+  return widths;
+}
+
+function TextTile({ album, headingLevel, className = "", style }) {
+  const Heading = `h${headingLevel}`;
+  const count = `${album.photos.length} photo${album.photos.length === 1 ? "" : "s"}`;
+  const proof = albumEvidence(album.slug);
+  const location = album.mapsUrl ? <a href={album.mapsUrl} target="_blank" rel="noreferrer">{album.location}</a> : album.location;
+  return (
+    <div className={`mosaic-text ${className}`} style={style}>
+      <Heading className="mosaic-title">{album.url ? <a href={album.url} target="_blank" rel="noreferrer">{album.title}</a> : album.title}</Heading>
+      <p className="mosaic-where">{location} · {album.dateLabel || album.date}</p>
+      {album.description && <p className="mosaic-desc">{album.description}</p>}
+      <p className="mosaic-count">{count}</p>
+      {(album.relatedHref || proof) && (
+        <p className="mosaic-links">
+          {album.relatedHref && <SmartLink href={album.relatedHref} className="mosaic-related">{album.relatedLabel || "Related →"}</SmartLink>}
+          {proof && <a href={proof.file} target="_blank" rel="noreferrer" className="mosaic-related">{proof.type === "certificate" ? "Certificate" : "Results"} →</a>}
+        </p>
+      )}
+    </div>
+  );
+}
+
 const srcSetFor = (src) => {
   const small = src.replace(/\.webp$/, "-sm.webp");
   const [a, b] = [mediaSize(small), mediaSize(src)];
   return a && b ? `${small} ${a[0]}w, ${src} ${b[0]}w` : undefined;
 };
 
-// Each recipe: text tile position (after N photos), its shape, and each photo's [cols, rows] by index.
-const recipes = [
-  { textAfter: 0, text: "wide", align: "left", spans: [[2, 2], [1, 1], [1, 1], [2, 1], [1, 2], [1, 1], [1, 1], [2, 1]] },
-  { textAfter: Infinity, text: "bar", align: "center", spans: [[2, 2], [1, 2], [1, 1], [1, 1], [2, 1], [1, 1], [1, 1], [2, 1]] },
-  { textAfter: 2, text: "wide", align: "right", spans: [[1, 2], [1, 2], [1, 1], [1, 1], [1, 1], [1, 1], [2, 1], [1, 1]] },
-  { textAfter: 1, text: "tall", align: "left", spans: [[2, 2], [1, 2], [1, 1], [1, 1], [2, 1], [1, 1], [1, 1], [2, 1]] },
-];
-
-const textSpan = (shape, cols) => {
-  if (shape === "bar") return [cols, cols === 4 ? 1 : 2];
-  if (shape === "tall") return cols > 2 ? [1, 3] : [2, 2];
-  return [2, 2];
-};
-
-function useColumns() {
-  const query = () => (window.matchMedia("(min-width: 1024px)").matches ? 4 : window.matchMedia("(min-width: 640px)").matches ? 3 : 2);
-  const [cols, setCols] = useState(query);
-  useEffect(() => {
-    const update = () => setCols(query());
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-  return cols;
-}
-
-// First-fit placement on a cols-wide grid, then grow neighbours into any empty cell so the block has no holes.
-function pack(items, cols) {
-  const grid = [];
-  const free = (r, c) => c >= 0 && c < cols && r >= 0 && !(grid[r] && grid[r][c] !== undefined);
-  const mark = (item, id) => {
-    for (let r = item.y; r < item.y + item.h; r++) for (let c = item.x; c < item.x + item.w; c++) (grid[r] ||= [])[c] = id;
-  };
-  const placed = items.map((item) => ({ ...item, w: Math.min(item.w, cols) }));
-  placed.forEach((item, id) => {
-    for (let r = 0; ; r++) {
-      for (let c = 0; c + item.w <= cols; c++) {
-        let fits = true;
-        for (let dr = 0; dr < item.h && fits; dr++) for (let dc = 0; dc < item.w && fits; dc++) fits = free(r + dr, c + dc);
-        if (fits) { item.x = c; item.y = r; mark(item, id); return; }
-      }
-    }
-  });
-  const rows = Math.max(...placed.map((item) => item.y + item.h));
-  const owner = (r, c) => (r >= 0 && r < rows && c >= 0 && c < cols && grid[r] ? grid[r][c] : undefined);
-  const colFree = (item, c) => { for (let r = item.y; r < item.y + item.h; r++) if (!free(r, c)) return false; return true; };
-  const rowFree = (item, r) => r < rows && [...Array(item.w).keys()].every((dc) => free(r, item.x + dc));
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        if (!free(r, c)) continue;
-        const left = placed[owner(r, c - 1)], above = placed[owner(r - 1, c)], right = placed[owner(r, c + 1)];
-        if (left && colFree(left, c)) { left.w += 1; mark(left, owner(r, c - 1)); changed = true; }
-        else if (above && rowFree(above, r)) { const id = owner(r - 1, c); above.h += 1; mark(above, id); changed = true; }
-        else if (right && colFree(right, c)) { const id = owner(r, c + 1); right.x -= 1; right.w += 1; mark(right, id); changed = true; }
-      }
-    }
-  }
-  return placed;
-}
-
-function TextTile({ album, shape, align, style, headingLevel }) {
-  const Heading = `h${headingLevel}`;
-  const count = `${album.photos.length} photo${album.photos.length === 1 ? "" : "s"}`;
-  const location = album.mapsUrl ? <a href={album.mapsUrl} target="_blank" rel="noreferrer">{album.location}</a> : album.location;
-  return (
-    <div className={`mosaic-text shape-${shape} align-${align}`} style={style}>
-      <Heading className="mosaic-title">{album.url ? <a href={album.url} target="_blank" rel="noreferrer">{album.title}</a> : album.title}</Heading>
-      <p className="mosaic-where">{location} · {album.dateLabel || album.date}</p>
-      {album.description && <p className="mosaic-desc">{album.description}</p>}
-      <p className="mosaic-count">{count}</p>
-      {album.relatedHref && <SmartLink href={album.relatedHref} className="mosaic-related">{album.relatedLabel || "Related →"}</SmartLink>}
-    </div>
-  );
-}
-
 export default function AlbumMosaic({ album, index = 0, headingId, headingLevel = 3, eager = false }) {
   const openLightbox = useLightbox();
-  const cols = useColumns();
-  const recipe = recipes[index % recipes.length];
-  const photos = album.photos.map((photo, i) => {
-    const [w, h] = recipe.spans[i] || [1, 1];
-    return { kind: "photo", photo, i, w, h };
-  });
-  const [tw, th] = textSpan(recipe.text, cols);
-  const items = [...photos];
-  items.splice(Math.min(recipe.textAfter, photos.length), 0, { kind: "text", w: tw, h: th });
+  const [ref, width] = useContainerWidth();
+  const recipe = index % 4;
   const lightboxItems = album.photos.map((photo) => ({ ...photo, caption: photo.alt }));
-  const place = (item) => ({ gridColumn: `${item.x + 1} / span ${item.w}`, gridRow: `${item.y + 1} / span ${item.h}` });
+  const photos = album.photos.map((photo, i) => {
+    const size = mediaSize(photo.src);
+    const real = size ? size[0] / size[1] : 1.5;
+    return { kind: "photo", photo, i, a: clamp(real), contain: real < MIN_ASPECT || real > MAX_ASPECT };
+  });
+  const layout = width > 0 ? buildLayout(photos, width, recipe) : null;
+  const align = recipe === 1 ? "right" : recipe === 3 ? "center" : "left";
 
   return (
-    <div className="mosaic" id={headingId || album.slug}>
-      {pack(items, cols).map((item) => item.kind === "text"
-        ? <TextTile key="text" album={album} shape={recipe.text} align={recipe.align} style={place(item)} headingLevel={headingLevel} />
-        : (
-          <button key={item.photo.src} type="button" className="mosaic-photo" style={place(item)} onClick={() => openLightbox(lightboxItems, item.i)} aria-label={`View ${item.photo.alt}`}>
-            <img src={item.photo.src} srcSet={srcSetFor(item.photo.src)} sizes={MOSAIC_SIZES} alt={item.photo.alt} loading={eager && item.i < 3 ? "eager" : "lazy"} fetchPriority={eager && item.i === 0 ? "high" : undefined} decoding="async" style={item.photo.focus ? { objectPosition: item.photo.focus } : undefined} />
-          </button>
-        ))}
+    <div className="mosaic" id={headingId || album.slug} ref={ref}>
+      {layout?.textPlacement === "top" && <TextTile album={album} headingLevel={headingLevel} className="text-block" />}
+      {layout?.rows.map((row, r) => {
+        const widths = tileWidths(row, width);
+        return (
+          <div className="mosaic-row" key={r} style={{ height: Math.round(row.h) }}>
+            {row.tiles.map((tile, t) => {
+              const style = { width: `${(widths[t] / width) * 100}%` };
+              if (tile.kind === "text") return <TextTile key="text" album={album} headingLevel={headingLevel} className={`align-${align}`} style={style} />;
+              return (
+                <button key={tile.photo.src} type="button" className={tile.contain ? "mosaic-photo contain" : "mosaic-photo"} style={style} onClick={() => openLightbox(lightboxItems, tile.i)} aria-label={`View ${tile.photo.alt}`}>
+                  <img
+                    src={tile.photo.src}
+                    srcSet={srcSetFor(tile.photo.src)}
+                    sizes={`${widths[t]}px`}
+                    alt={tile.photo.alt}
+                    loading={eager && tile.i < 3 ? "eager" : "lazy"}
+                    fetchPriority={eager && tile.i === 0 ? "high" : undefined}
+                    decoding="async"
+                  />
+                </button>
+              );
+            })}
+          </div>
+        );
+      })}
+      {layout?.textPlacement === "bar" && <TextTile album={album} headingLevel={headingLevel} className="text-bar align-center" />}
     </div>
   );
 }

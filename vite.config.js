@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 // Legacy originals stay in public/ as a backup but are no longer referenced, so they are not deployed.
-const excludedFromDeploy = ["images", "evidence"];
+const excludedFromDeploy = ["images"];
 
 function copyPublicExceptLegacy() {
   let root, outDir;

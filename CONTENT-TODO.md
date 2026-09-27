@@ -70,6 +70,16 @@ This file lives at the repo root and is not deployed.
 - **Omni-Wheel video**: 17 MB, loads only on click. Compress it when you have ffmpeg:
   `ffmpeg -i demo.mp4 -vf scale=-2:960 -c:v libx264 -crf 28 -an demo-small.mp4`
 
-## 8. Retired files you can delete yourself
-These are still in `public/` but no longer referenced or deployed (the build skips `public/images/` and `public/evidence/`). See ASSET-MAP.md §B.
+## 8. Evidence privacy check (done before publishing)
+I viewed every page of all 11 PDFs and the 3 evidence images. **Needs redaction: none.** No document shows a national ID number, date of birth, address or phone number.
+
+Judgment calls for you to confirm:
+- **Officials' signatures.** Every certificate carries the printed signatures of its issuing officials (examination commissioners, IEEE presidents, event chairs). I read your "signature" rule as your own signature, which appears on none of them, so they are published. To hide any, add `needsRedaction: true` to that evidence entry in `src/data/site.js`; its chip and archive card then disappear.
+- **Exam records.** The A/L official statement shows the exam index number, serial number and reference number. The O/L results schedule shows the index number, centre number and school. These are not national IDs, but anyone holding them can look up your results.
+- **ICPC certificate.** It names your teammates (Shihara Dewagedara, D.K.G.P.C.B. Wijerathne).
+- **Labels.** The HaXtreme 4.0 and PreCoders V11 PDFs are result sheets (photos plus leaderboards), not certificates, so they are labelled "Results".
+- **Hidden rows.** IEEEXtreme 19.0 and MoraXtreme 9.0 are participation-only. Their award rows stay hidden, so their certificates appear only in the archive (Participation), without an inline chip.
+
+## 9. Retired files you can delete yourself
+These are still in `public/images/` but no longer referenced or deployed (the build skips `public/images/`). `public/evidence/` is live again. See ASSET-MAP.md §B.
 The root `favicon.svg` and `vite.svg` are also unused now; the favicon is served from `public/favicon.svg`.

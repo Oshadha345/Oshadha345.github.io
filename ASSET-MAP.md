@@ -137,19 +137,19 @@ Decisions: **Place** (copied + optimized into `public/media/`), **Keep**, **Repl
 | blogs/EEES Magazine 2026/EEES Magazine 2026.pdf (73 MB) | Not copied (rules.md) | — | linked via Google Drive; git-ignored |
 | blogs/EEES Magazine 2026/rules.md | Read → data | site.js writing | Drive link already present |
 | BioFusion …/BioMamba_Report.pdf | Duplicate → Move | media/projects/bratsmamba/report.pdf | BraTSMamba "Report" link |
-| AL and OL Certificates/Advanced Level … .pdf | Duplicate | (public/evidence copy retired) | not linked; "on request" |
-| AL and OL Certificates/Ordinary Level … .pdf | Duplicate | (retired) | O/L removed from site |
-| CodeArena25/CodeArena_Finalist.pdf | Duplicate | (retired) | on request |
-| Haxtreme4/Haxtreme4.0_finalist.pdf | Duplicate | (retired) | on request |
-| ICPC/ICPC_finalist.pdf | Duplicate | (retired) | on request |
-| PreCoders and Coders V11/…Finalist.pdf | Duplicate | (retired) | on request |
-| UOJ Coder_4.0/UOJCoders_Finalist.pdf | Duplicate | (retired) | on request |
-| ieee xtreme 18/ieeextreme_18_certificate.pdf | Duplicate | (retired) | on request |
-| ieee xtreme 19/ieeextreme_19_certificate.pdf | Duplicate | (retired) | participant entry hidden |
-| mora xtreme 10.0/Oshadha_Samarakoon.pdf | Duplicate | (retired) | on request |
-| mora xtreme 10.0/Hackerrank Dashboard.png | Duplicate | (retired) | elimination rank 11 already in text |
-| mora xtreme 10.0/Moraxtreme10_finalist_poster_team_nocturnals.jpg | Duplicate | (retired) | no MoraXtreme photo album exists |
-| mora xtreme 9.0/Moraxtreme9.jpeg | Duplicate | (retired) | participation only |
+| AL and OL Certificates/Advanced Level … .pdf | Duplicate | public/evidence/advanced-level-certificate.pdf (Keep) | About → A/L "Certificate" chip + archive |
+| AL and OL Certificates/Ordinary Level … .pdf | Duplicate | public/evidence/ordinary-level-certificate.pdf (Keep) | About → O/L "Certificate" chip + archive |
+| CodeArena25/CodeArena_Finalist.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| Haxtreme4/Haxtreme4.0_finalist.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| ICPC/ICPC_finalist.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| PreCoders and Coders V11/…Finalist.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| UOJ Coder_4.0/UOJCoders_Finalist.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| ieee xtreme 18/ieeextreme_18_certificate.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| ieee xtreme 19/ieeextreme_19_certificate.pdf | Duplicate | public/evidence copy (Keep) | archive (Participation); the participant row stays hidden |
+| mora xtreme 10.0/Oshadha_Samarakoon.pdf | Duplicate | public/evidence copy (Keep) | About → award chip + archive |
+| mora xtreme 10.0/Hackerrank Dashboard.png | Duplicate | public/evidence/moraxtreme-10-ranking.png (Keep) | MoraXtreme 10.0 "Ranking" chip + archive |
+| mora xtreme 10.0/Moraxtreme10_finalist_poster_team_nocturnals.jpg | Duplicate | public/evidence/moraxtreme-10-finalist-poster.jpg (Keep) | MoraXtreme 10.0 "Finalist flyer" chip + archive |
+| mora xtreme 9.0/Moraxtreme9.jpeg | Duplicate | public/evidence/moraxtreme-9-certificate.jpg (Keep) | archive (Participation) |
 
 ## B. Existing `public/`
 
@@ -160,7 +160,7 @@ Decisions: **Place** (copied + optimized into `public/media/`), **Keep**, **Repl
 | images/avatars/avatar.png (658 KB) | Home | Replace | media/profile/portrait.webp |
 | images/books/An_Eternal_Golden_Braid.jpg | Book Sunday | Move | media/reading/godel-escher-bach.webp |
 | images/education/university-of-peradeniya.png | Education | Move | media/education/university-of-peradeniya.webp |
-| images/education/sri-chandananda-buddhist-college.png | Education | Retire | school is a single text line now |
+| images/education/sri-chandananda-buddhist-college.png | Education | Keep → Move | media/education/sri-chandananda-buddhist-college.webp (About → Education, school card crest) |
 | images/projects/aiagents/dragent.png | AI Agents | Move | media/projects/ai-agents/cover.webp |
 | images/projects/BraTSMamba/BraTSMamba.png | BraTSMamba | Move | media/projects/bratsmamba/cover.webp |
 | images/projects/BraTSMamba/Logo.png (7 MB) | — | Move | …/bratsmamba/fig-1-overview.webp |
@@ -218,17 +218,17 @@ Decisions: **Place** (copied + optimized into `public/media/`), **Keep**, **Repl
 | images/projects/solar_irradiance_seg/ucloudnet.png | — | Move | …/fig-5-ucloudnet.webp |
 | images/projects/solar_irradiance_seg/ucloundnet pipeline.png | — | Move | …/fig-6-ucloudnet-pipeline.webp |
 | images/projects/sync_gen/syncgen.png | Sync gen | Move | media/projects/synchronous-generator-modelling/cover.webp |
-| evidence/bratsmamba-biofusion-report.pdf | BraTSMamba | Move | media/projects/bratsmamba/report.pdf |
-| evidence/*-preview.jpg (10 files) | EvidenceGrid | Retire | certificate grid removed |
-| evidence/*.pdf (10 certificates) | EvidenceGrid / Education | Retire | "Certificates available on request" |
-| evidence/moraxtreme-10-finalist-poster.jpg | EvidenceGrid | Retire | |
-| evidence/moraxtreme-10-ranking.png | — | Retire | |
-| evidence/moraxtreme-9-certificate.jpg | EvidenceGrid | Retire | |
+| evidence/bratsmamba-biofusion-report.pdf | BraTSMamba | Keep | also copied to media/projects/bratsmamba/report.pdf (the project "Report" link); original URL still resolves |
+| evidence/*.pdf (10 certificates and result sheets) | EvidenceGrid / Education | Keep | deployed at the original URLs; linked from About inline chips and the About → Certificates & evidence archive |
+| evidence/*-preview.jpg (10 files) | EvidenceGrid | Keep | superseded for display by media/evidence/<slug>.webp (re-rendered from each PDF's first page, 900 px); originals kept and deployed |
+| evidence/moraxtreme-10-finalist-poster.jpg | EvidenceGrid | Keep | display copy media/evidence/moraxtreme-10-finalist-poster.webp → MoraXtreme 10.0 "Finalist flyer" chip + archive |
+| evidence/moraxtreme-10-ranking.png | — | Keep | display copy media/evidence/moraxtreme-10-ranking.webp → MoraXtreme 10.0 "Ranking" chip + archive |
+| evidence/moraxtreme-9-certificate.jpg | EvidenceGrid | Keep | display copy media/evidence/moraxtreme-9-certificate.webp → archive (Participation) |
 | writing/the-eternal-harmonic.pdf | Writing | Keep | |
 | writing/from-apollo-to-ai.pdf | Writing | Keep | |
 
-Retired and moved originals stay in `public/` (nothing deleted). `public/images/**` and `public/evidence/**` are
-excluded from the `docs/` build by a small plugin in `vite.config.js`, so they no longer ship to GitHub Pages.
+Retired and moved originals stay in `public/` (nothing deleted). `public/images/**` is excluded from the `docs/` build by a small
+plugin in `vite.config.js`. `public/evidence/**` is deployed, so every old `/evidence/*.pdf` URL still resolves.
 
 ## C. Generated assets
 | File | Placement |
@@ -237,6 +237,8 @@ excluded from the `docs/` build by a small plugin in `vite.config.js`, so they n
 | favicon.svg, apple-touch-icon.png (180×180) | browser icons |
 | media/publications/<slug>/citation.bib (×3) | BibTeX dialog, built only from facts in site.js / info.md |
 | media/projects/omni-wheel-robot/demo-poster.webp | video poster frame |
+| media/evidence/<slug>.webp (13) | evidence previews (first PDF page or the original image, ≤ 900 px, uncropped): About chips (lightbox) and the archive |
+| media/education/sri-chandananda-buddhist-college.webp | About → Education, school card crest |
 
 ## Missing (design expects an asset, none exists)
 - `teaser.png` (a real figure from the paper) for all three papers; tiles use the generated covers.

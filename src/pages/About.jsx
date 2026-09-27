@@ -1,8 +1,9 @@
 import SEO from "../components/common/SEO";
 import Img from "../components/common/Img";
 import AlbumMosaic from "../components/common/AlbumMosaic";
+import { EvidenceArchive, EvidenceChips } from "../components/common/Evidence";
 import { MoreLink, PageHeader, Section } from "../components/common/SiteBlocks";
-import { awards, education, profile, skills } from "../data/site";
+import { albumForAward, awards, education, evidenceArchive, profile, skills } from "../data/site";
 import { albumsNewestFirst } from "../data/gallery";
 
 function AwardList({ items }) {
@@ -11,7 +12,7 @@ function AwardList({ items }) {
       {items.map((item) => (
         <li key={`${item.year}-${item.title}`}>
           <span className="award-year">{item.year}</span>
-          <div><strong>{item.title}</strong><span>{item.result}</span></div>
+          <div><strong>{item.title}</strong><span>{item.result}</span><EvidenceChips evidence={item.evidence} title={item.title} /></div>
         </li>
       ))}
     </ul>
@@ -19,11 +20,11 @@ function AwardList({ items }) {
 }
 
 export default function About() {
-  const { university } = education;
+  const { university, school } = education;
   const visibleAwards = awards.filter((item) => !item.participant);
   const topAwards = visibleAwards.filter((item) => item.top);
   const otherAwards = visibleAwards.filter((item) => !item.top);
-  const topAlbumSlugs = topAwards.map((item) => item.album).filter(Boolean);
+  const topAlbumSlugs = topAwards.map(albumForAward).filter(Boolean);
   const competitionAlbums = albumsNewestFirst.filter((album) => topAlbumSlugs.includes(album.slug)).slice(0, 2);
   const bio = profile.longBio.length ? profile.longBio : [profile.bio];
 
@@ -44,10 +45,31 @@ export default function About() {
               <dl className="edu-metrics">{university.metrics.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
             </div>
           </article>
-          <p className="school-line">{education.school}</p>
+          <article className="edu-card">
+            <Img src={school.logo} alt={`${school.institution} crest`} className="edu-logo" />
+            <div>
+              <span className="timeline-period">{school.period}</span>
+              <h3>{school.institution}</h3>
+              <p>{school.program}</p>
+              <ul className="exam-list">
+                {school.exams.map((exam) => (
+                  <li key={exam.title}>
+                    <span className="exam-date">{exam.date}</span>
+                    <div>
+                      <strong>{exam.title}</strong>
+                      {exam.subtitle && <span className="exam-subtitle">{exam.subtitle}</span>}
+                      <span>{exam.summary}</span>
+                      {exam.note && <span className="exam-note">{exam.note}</span>}
+                      <EvidenceChips evidence={exam.evidence} title={exam.title} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
         </Section>
 
-        <Section number="02" title="Honors & awards" id="honors" subtitle="Programming competitions. Certificates available on request.">
+        <Section number="02" title="Honors & awards" id="honors" subtitle="Programming competitions.">
           <AwardList items={topAwards} />
           {otherAwards.length > 0 && (
             <details className="more-awards">
@@ -67,7 +89,11 @@ export default function About() {
           <dl className="skill-rows">{skills.map(([label, items]) => <div key={label}><dt>{label}</dt><dd>{items}</dd></div>)}</dl>
         </Section>
 
-        <Section number="04" title="Contact" id="contact">
+        <Section number="04" title="Certificates & evidence" id="evidence" subtitle="Original certificates, finalist announcements and rankings.">
+          <EvidenceArchive items={evidenceArchive} />
+        </Section>
+
+        <Section number="05" title="Contact" id="contact">
           <div className="contact">
             <p><a href={`mailto:${profile.email}`}>{profile.email}</a></p>
             {profile.status && <p className="status-line"><span className="status-dot" aria-hidden="true" />{profile.status}</p>}
