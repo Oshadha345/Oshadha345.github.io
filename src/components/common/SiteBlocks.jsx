@@ -1,62 +1,127 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import Img from "./Img";
+import { useLightbox } from "./Lightbox";
+import { getArea } from "../../data/site";
 
-export function PageIntro({ eyebrow, title, children, className = "" }) {
-  return <header className={`page-intro ${className}`}><span className="eyebrow">{eyebrow}</span><h1>{title}</h1>{children && <p>{children}</p>}</header>;
+export const isExternal = (href) => /^https?:/.test(href) || href.endsWith(".pdf") || href.startsWith("mailto:");
+
+export function SmartLink({ href, children, className, ...rest }) {
+  if (isExternal(href)) {
+    const newTab = !href.startsWith("mailto:");
+    return <a href={href} className={className} target={newTab ? "_blank" : undefined} rel={newTab ? "noreferrer" : undefined} {...rest}>{children}</a>;
+  }
+  return <Link to={href} className={className} {...rest}>{children}</Link>;
+}
+
+export function PageHeader({ kicker, title, children, aside }) {
+  return (
+    <header className="page-header">
+      <span className="kicker">{kicker}</span>
+      <h1>{title}</h1>
+      {children && <p className="page-lede">{children}</p>}
+      {aside}
+    </header>
+  );
+}
+
+export function Section({ number, title, subtitle, id, children, action, className = "" }) {
+  return (
+    <section className={`section ${className}`} id={id} aria-labelledby={id ? `${id}-title` : undefined}>
+      <div className="section-head">
+        <div>
+          {number && <span className="section-number">{number}</span>}
+          <h2 id={id ? `${id}-title` : undefined}>{title}</h2>
+          {subtitle && <p className="section-subtitle">{subtitle}</p>}
+        </div>
+        {action}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+export function MoreLink({ to, children }) {
+  return <SmartLink href={to} className="more-link">{children} <ArrowRight size={15} aria-hidden="true" /></SmartLink>;
+}
+
+const statusLabels = { accepted: "Accepted", published: "Published", preprint: "Preprint", "in-preparation": "In preparation", ongoing: "Ongoing" };
+
+export function StatusBadge({ status }) {
+  if (!status) return null;
+  const tone = ["accepted", "published"].includes(status) ? "ok" : status === "ongoing" ? "blue" : "muted";
+  return <span className={`badge badge-${tone}`}>{statusLabels[status] || status}</span>;
+}
+
+export function AreaLabel({ area }) {
+  const found = getArea(area);
+  return found ? <span className="area-label">{found.name}</span> : null;
+}
+
+const SELF_SPLIT = /(O\. Samarakoon†?|Oshadha Samarakoon†?)/;
+const SELF_MATCH = /^(O\. Samarakoon†?|Oshadha Samarakoon†?)$/;
+
+export function Authors({ authors }) {
+  if (!authors) return null;
+  return <p className="authors">{authors.split(SELF_SPLIT).map((part, index) => (SELF_MATCH.test(part) ? <strong key={index}>{part}</strong> : part))}</p>;
 }
 
 export function TextLinks({ links = [] }) {
   if (!links.length) return null;
-  return <div className="text-links">{links.map(([label, href]) => <a key={`${label}-${href}`} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>{label} ↗</a>)}</div>;
+  return <div className="text-links">{links.map(([label, href]) => <SmartLink key={`${label}-${href}`} href={href}>{label}</SmartLink>)}</div>;
 }
 
-export function MetricText({ children }) {
-  if (typeof children !== "string") return children;
-  return children.split(/((?:Top\s+)?\d+(?:\.\d+)?(?:st|nd|rd|th)?(?:\/[\d.]+)?(?:\+)?)/gi).map((part, index) =>
-    /^(?:Top\s+)?\d/i.test(part) ? <strong className="metric" key={index}>{part}</strong> : part
+export function Timeline({ items, compact = false }) {
+  return (
+    <ol className={compact ? "timeline compact" : "timeline"}>
+      {items.map((item) => (
+        <li key={`${item.period}-${item.title}`}>
+          <span className="timeline-period">{item.period}</span>
+          <div>
+            <h3>{item.title}</h3>
+            {item.place && <p className="timeline-place">{item.place}</p>}
+            {item.supervisor && <p className="timeline-meta">{item.supervisor}</p>}
+            {!compact && item.description && <p>{item.description}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
   );
 }
 
-export function Publication({ item }) {
-  const highlightName = (authors) => {
-    if (!authors) return null;
-    const parts = authors.split(/(O\. Samarakoon|Oshadha Samarakoon)/g);
-    return parts.map((part, index) => /^(O\. Samarakoon|Oshadha Samarakoon)$/.test(part) ? <strong key={index}>{part}</strong> : part);
+export function useFilterParam(name, allowed) {
+  const [params, setParams] = useSearchParams();
+  const raw = params.get(name);
+  const value = allowed.includes(raw) ? raw : "all";
+  const setValue = (next) => {
+    const updated = new URLSearchParams(params);
+    if (next === "all") updated.delete(name); else updated.set(name, next);
+    setParams(updated, { replace: true, preventScrollReset: true });
   };
-  return <article className="publication glass">
-    <div className="publication-copy"><div className="meta">{item.venue}</div><h3>{item.title}</h3>
-      {item.authors && <p className="authors">{highlightName(item.authors)}</p>}
-      {item.description && <p>{item.description}</p>}
-      {item.note && <p className="notice">{item.note}</p>}
-      <TextLinks links={item.links} />
-    </div>
-  </article>;
+  return [value, setValue];
 }
 
-export function Timeline({ items }) {
-  return <div className="timeline">{items.map((item) => <article key={`${item.period}-${item.title}`}>
-    <div className="meta">{item.period}</div>
-    <div><h3>{item.title}</h3>{item.place && <p className="place">{item.place}</p>}{item.supervisor && <p className="muted">{item.supervisor}</p>}<p><MetricText>{item.description}</MetricText></p></div>
-  </article>)}</div>;
+export function FilterChips({ label, options, value, onChange }) {
+  return (
+    <div className="chips" role="group" aria-label={label}>
+      {options.map((option) => (
+        <button key={option.id} type="button" className="chip" aria-pressed={value === option.id} onClick={() => onChange(option.id)}>
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
-export function ProjectList({ items }) {
-  return <div className="project-grid">{items.map((item) => <article className="project-card glass" key={item.id}>
-    <Link className={item.image ? "project-media" : "project-media project-placeholder"} to={`/projects/${item.id}`}>
-      {item.image ? <img src={item.image} alt="" /> : <span>{item.title.split(" ").map((word) => word[0]).join("").slice(0, 3)}</span>}
-    </Link>
-    <div className="project-copy"><div className="project-kicker"><span>{item.category}</span>{item.period && <span>{item.period}</span>}</div>
-      <Link to={`/projects/${item.id}`}><h3>{item.title}</h3></Link><p>{item.description}</p>
-      {item.tags && <div className="tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
-      <div className="project-actions"><Link to={`/projects/${item.id}`}>Details →</Link><TextLinks links={item.links} /></div>
-    </div>
-  </article>)}</div>;
-}
-
-export function EvidenceGrid({ items }) {
-  return <div className="evidence-grid">{items.map((item, index) => <article className="evidence-card glass" key={item.file}>
-    <div className={item.preview ? "evidence-preview" : `evidence-preview evidence-art evidence-art-${index % 4}`}>
-      {item.preview ? <img src={item.preview} alt="Certificate preview" /> : <span>Verified<br />document</span>}
-    </div>
-    <div className="evidence-copy"><div className="meta">{item.detail}</div><h3>{item.title}</h3><a href={item.file} target="_blank" rel="noreferrer">View</a><a href={item.file} download>Download ↓</a></div>
-  </article>)}</div>;
+export function FigureCard({ src, alt, lead, caption, gallery, index = 0, eager = false, className = "" }) {
+  const openLightbox = useLightbox();
+  const items = gallery || [{ src, alt, caption: lead ? `${lead} ${caption || ""}`.trim() : caption }];
+  return (
+    <figure className={`figure-card ${className}`}>
+      <button type="button" className="figure-button" onClick={() => openLightbox(items, index)} aria-label={`Enlarge: ${alt}`}>
+        <Img src={src} alt={alt} eager={eager} />
+      </button>
+      {(lead || caption) && <figcaption>{lead && <strong>{lead}</strong>} {caption}</figcaption>}
+    </figure>
+  );
 }

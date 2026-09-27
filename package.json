@@ -5,28 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/optimize-images.mjs && node scripts/generate-sitemap.mjs",
     "build": "vite build --outDir docs",
-    "preview": "vite preview"
+    "preview": "vite preview --outDir docs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.17",
     "@vitejs/plugin-react": "^5.1.2",
-    "gh-pages": "^6.3.0",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.1.17",
-    "terser": "^5.44.1",
     "vite": "^7.2.7"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "katex": "^0.16.28",
     "lucide-react": "^0.560.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-helmet-async": "^2.0.5",
-    "react-markdown": "^10.1.0",
-    "react-router-dom": "^6.20.0",
-    "rehype-katex": "^7.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0"
+    "react-router-dom": "^6.20.0"
   }
 }
