@@ -157,7 +157,7 @@ export const education = {
     program: "B.Sc. Engineering (Honours)",
     specialization: "Electrical & Electronic Engineering",
     metrics: [
-      ["Second- and third-year CGPA", "3.504/4.00"],
+      ["Second- and third-year CGPA", "3.557/4.00"],
       ["First-year General Engineering GPA", "3.7545/4.00"],
     ],
   },

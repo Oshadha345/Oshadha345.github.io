@@ -37,7 +37,7 @@ This file lives at the repo root and is not deployed.
 3. **NIFS role.** info.md says "Research Volunteer", site.js "Volunteer Assistant Researcher", the CV "Research Assistant".
 4. **NIFS dates.** Your ID badge shows validity 01.11.2022–30.04.2023; site.js says Oct 2022–Mar 2023.
 5. **ORBIT-Mamba role.** The CV says you "lead architecture design, training, and experimental work for the ORBIT-Mamba and SolarMamba projects". site.js says ORBIT-Mamba is "Dineth Perera-led" and you are a co-author.
-6. **Education metrics.** About shows the two GPA lines from site.js. The first-year rank (41/457) was dropped per "only what my transcript states". Re-add it if it is on the transcript. (The CV lists only "CGPA 3.504".)
+6. **Education metrics.** About shows the two GPA lines from site.js. The first-year rank (41/457) was dropped per "only what my transcript states". Re-add it if it is on the transcript. (The CV lists only "CGPA 3.557".)
 7. **IGARSS status.** The CV says "Accepted", so the site shows ACCEPTED even though the conference has taken place. Switch to `published` once the IEEE Xplore DOI exists, then add the DOI link.
 
 ## 5. Gallery (`src/data/gallery.js`)
