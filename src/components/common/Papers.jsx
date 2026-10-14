@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
-import { Box, Check, CodeXml, Copy, FileText, Globe, Images, Link2, Presentation, Quote, X } from "lucide-react";
+import { Box, Check, CodeXml, Copy, FileDown, FileText, Globe, Images, Link2, Presentation, Quote, X } from "lucide-react";
 import Img from "./Img";
 import { useLightbox } from "./Lightbox";
-import { AreaLabel, Authors, SmartLink, StatusBadge } from "./SiteBlocks";
+import { AreaLabel, Authors, RichText, SmartLink, StatusBadge } from "./SiteBlocks";
 import { publicationMedia } from "../../lib/media";
 import { albumsForPaper } from "../../data/gallery";
 
-const icons = { Paper: FileText, Code: CodeXml, Models: Box, Project: Globe, DOI: Link2, Report: FileText, Site: Globe };
+const icons = { Paper: FileText, PDF: FileDown, Code: CodeXml, Models: Box, Project: Globe, DOI: Link2, Report: FileText, Site: Globe };
 
 function Pill({ href, label, icon: Icon, onClick }) {
   const content = <><Icon size={15} aria-hidden="true" />{label}</>;
@@ -74,6 +74,7 @@ export function PaperTile({ item, headingLevel = 3 }) {
   const gallery = [media.cover, media.teaser].filter(Boolean).map((src) => ({
     src,
     alt: src === media.teaser ? `Figure from ${item.title}` : `Overview figure for ${item.title}`,
+    caption: <>{src === media.teaser ? "Figure from " : "Overview figure for "}<RichText>{item.title}</RichText></>,
   }));
   return (
     <article className={image ? "paper-tile" : "paper-tile no-image"} id={item.slug}>
@@ -88,9 +89,9 @@ export function PaperTile({ item, headingLevel = 3 }) {
           <StatusBadge status={item.status} />
           <AreaLabel area={item.area} />
         </div>
-        <Heading className="paper-title">{href ? <a href={href} target="_blank" rel="noreferrer">{item.title}</a> : item.title}</Heading>
+        <Heading className="paper-title">{href ? <a href={href} target="_blank" rel="noreferrer"><RichText>{item.title}</RichText></a> : <RichText>{item.title}</RichText>}</Heading>
         <Authors authors={item.authors} />
-        {item.tldr && <p className="tldr"><strong>TL;DR</strong> {item.tldr}</p>}
+        {item.tldr && <p className="tldr"><strong>TL;DR</strong> <RichText>{item.tldr}</RichText></p>}
         {item.contribution && <p className="contribution">My contribution: {item.contribution}</p>}
         <PaperLinks item={item} />
       </div>
@@ -105,7 +106,7 @@ export function PaperRow({ item }) {
     <article className="paper-row">
       {image && <SmartLink href={`/publications#${item.slug}`} className="paper-row-thumb" aria-hidden="true" tabIndex={-1}><Img src={image} alt="" sizes="120px" /></SmartLink>}
       <div>
-        <h3><SmartLink href={`/publications#${item.slug}`}>{item.title}</SmartLink></h3>
+        <h3><SmartLink href={`/publications#${item.slug}`}><RichText>{item.title}</RichText></SmartLink></h3>
         <Authors authors={item.authors} />
         <p className="paper-row-meta"><span className="venue">{item.venue}</span> <StatusBadge status={item.status} /></p>
       </div>
@@ -121,7 +122,7 @@ export function Manuscripts({ items }) {
       {items.map((item) => (
         <article className="manuscript" key={item.slug}>
           <div className="paper-meta"><StatusBadge status="in-preparation" /><AreaLabel area={item.area} /></div>
-          <h3 className="paper-title">{item.title}</h3>
+          <h3 className="paper-title"><RichText>{item.title}</RichText></h3>
           <Authors authors={item.authors} />
           <p className="manuscript-target">{item.venue}</p>
           {item.links.length > 0 && <div className="pill-row">{item.links.map(([label, href]) => <Pill key={label} href={href} label={label} icon={icons[label] || Globe} />)}</div>}

@@ -4,7 +4,7 @@ import Img from "../components/common/Img";
 import { profileIcons } from "../components/common/Icons";
 import { PaperRow } from "../components/common/Papers";
 import { OngoingCard } from "../components/common/Projects";
-import { MoreLink, Section, SmartLink, Timeline } from "../components/common/SiteBlocks";
+import { MoreLink, RichText, Section, SmartLink, Timeline } from "../components/common/SiteBlocks";
 import { areas, experience, news, profile, publications, researchProjects, SITE_URL } from "../data/site";
 
 const formatDate = (date) => {
@@ -107,7 +107,7 @@ export default function Home() {
                 {latest.map((item) => (
                   <li key={item.text}>
                     <time dateTime={item.date}>{formatDate(item.date)}</time>
-                    <span>{item.href ? <SmartLink href={item.href}>{item.text}</SmartLink> : item.text}</span>
+                    <span>{item.href ? <SmartLink href={item.href}><RichText>{item.text}</RichText></SmartLink> : <RichText>{item.text}</RichText>}</span>
                   </li>
                 ))}
               </ul>

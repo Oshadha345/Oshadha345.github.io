@@ -24,6 +24,8 @@ Decisions: **Place** (copied + optimized into `public/media/`), **Keep**, **Repl
 | publications/igarss26-vssm-benchmark/IEEE Assistant … Jason Dixson Photography … 7645.jpg (1024×683, IGARSS room signage) | Place | media/gallery/igarss-2026/03-venue-signage.webp | Gallery album `igarss-2026`, photo 3 |
 | publications/mercon26-mambarefine-cd/cover.png (1536×1024) | Place | media/publications/mercon26-mambarefine-cd/cover.webp | Publications tile + Home thumbnail |
 | publications/mercon26-solar-benchmark/cover.png (1536×1024) | Place | media/publications/mercon26-solar-benchmark/cover.webp | Publications tile + Home thumbnail |
+| publications/arxiv26-changet3/cover.png (1536×1024, generated cover) | Place | media/publications/arxiv26-changet3/cover.webp | Publications tile + lightbox for ChangeT³ (no teaser provided) |
+| (generated) arxiv26-changet3/citation.bib | Place | media/publications/arxiv26-changet3/citation.bib | ChangeT³ BibTeX dialog (text supplied by you, verbatim) |
 | publications/logo/igarss 2026.png (158×64, transparent) | Place | media/venues/igarss-2026.png (kept PNG, 9 KB) | Publications header venue row |
 | publications/logo/mecon-2026.png (2667×532, white artwork on transparent) | Place | media/venues/mercon-2026.png (128 px tall; white lettering recoloured to #3C4043 so it reads on white, crest unchanged) | Publications header venue row |
 
@@ -241,6 +243,7 @@ plugin in `vite.config.js`. `public/evidence/**` is deployed, so every old `/evi
 | media/education/sri-chandananda-buddhist-college.webp | About → Education, school card crest |
 
 ## Missing (design expects an asset, none exists)
+- `teaser.png` for ChangeT³ (`arxiv26-changet3`): a real paper figure (Fig. 1 or Fig. 2) for the lightbox.
 - `teaser.png` (a real figure from the paper) for all three papers; tiles use the generated covers.
 - `poster.pdf` and `slides.pdf` for all three papers.
 - Project covers for SolarMamba, ORBIT-Mamba, PatchFlow-PdM and Li-Fi File Sharing; these render text-only.

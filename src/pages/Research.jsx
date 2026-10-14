@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/common/SEO";
 import Img from "../components/common/Img";
 import { Manuscripts } from "../components/common/Papers";
-import { PageHeader, Section, StatusBadge, Timeline } from "../components/common/SiteBlocks";
+import { PageHeader, RichText, Section, StatusBadge, Timeline } from "../components/common/SiteBlocks";
 import { areas, experience, manuscripts, profile, publications, researchProjects } from "../data/site";
 
 function AreaSection({ area, number }) {
@@ -15,7 +15,7 @@ function AreaSection({ area, number }) {
         {area.image && <figure className="figure-card"><Img src={area.image} alt={`${area.name} overview figure`} /></figure>}
         <div className="area-lists">
           {area.description && <p>{area.description}</p>}
-          {papers.length > 0 && <><h3 className="kicker">Papers</h3><ul className="link-list">{papers.map((item) => <li key={item.slug}><Link to={`/publications#${item.slug}`}>{item.title}</Link> <span className="muted">{item.venue}</span></li>)}</ul></>}
+          {papers.length > 0 && <><h3 className="kicker">Papers</h3><ul className="link-list">{papers.map((item) => <li key={item.slug}><Link to={`/publications#${item.slug}`}><RichText>{item.title}</RichText></Link> <span className="muted">{item.venue}</span></li>)}</ul></>}
           {drafts.length > 0 && <><h3 className="kicker">Manuscripts in preparation</h3><ul className="link-list">{drafts.map((item) => <li key={item.slug}><Link to="/publications#manuscripts">{item.title}</Link> <span className="muted">{item.venue}</span></li>)}</ul></>}
           {projects.length > 0 && <><h3 className="kicker">Research projects</h3><ul className="link-list">{projects.map((item) => <li key={item.slug}><Link to={`/projects/${item.slug}`}>{item.title}</Link> <StatusBadge status={item.status} /></li>)}</ul></>}
         </div>

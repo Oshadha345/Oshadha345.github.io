@@ -15,6 +15,8 @@ This file lives at the repo root and is not deployed.
 | `areas[].description` (×3) | Research page, per-area section | short description |
 | `areas[].subtitle` (×3) | Home tiles, Research | **taken from the text inside your area images**; confirm or replace |
 | `publications[].tldr` (×3) | Publications tiles | one sentence each |
+| ChangeT³ `featured` (`publications`, slug `arxiv26-changet3`) | Home → Selected papers | currently `false`; Home shows the first 3 featured papers, so setting it `true` means unfeaturing one of the others |
+| ChangeT³ `contribution` | Publications tile ("My contribution: …") | set to your wording "Training, Experiment Design, Manuscript Writing"; confirm the final phrasing and capitalisation |
 | Image Encoders title + one-liner (`researchProjects`, id 19) | Home "Ongoing research", Projects | kept as-is; confirm, since your focus is now interpretability of vision encoders |
 
 ## 2. News dates (`news[]`)

@@ -58,6 +58,14 @@ export function AreaLabel({ area }) {
   return found ? <span className="area-label">{found.name}</span> : null;
 }
 
+const SUPERSCRIPTS = { "²": "2", "³": "3" };
+
+// Renders Unicode superscript digits (e.g. "ChangeT³") as real <sup> elements.
+export function RichText({ children }) {
+  if (typeof children !== "string") return children;
+  return children.split(/([²³])/).map((part, index) => (SUPERSCRIPTS[part] ? <sup key={index}>{SUPERSCRIPTS[part]}</sup> : part));
+}
+
 const SELF_SPLIT = /(O\. Samarakoon†?|Oshadha Samarakoon†?)/;
 const SELF_MATCH = /^(O\. Samarakoon†?|Oshadha Samarakoon†?)$/;
 

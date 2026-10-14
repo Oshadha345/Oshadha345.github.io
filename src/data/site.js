@@ -62,6 +62,24 @@ export const getArea = (id) => areas.find((area) => area.id === id);
 
 export const publications = [
   {
+    slug: "arxiv26-changet3",
+    year: 2026,
+    area: "remote-sensing",
+    status: "preprint",
+    featured: false, // TODO(content): decide whether it replaces a Home pick
+    venue: "arXiv preprint",
+    venueFull: "arXiv preprint arXiv:2610.15813 [cs.CV], October 2026",
+    title: "ChangeT³: Evaluating Vision Test-Time Training for Remote Sensing Change Detection",
+    authors: "S. Niranjan, O. Samarakoon, N. Wasalathilaka, R. Godaliyadda, P. Ekanayake, V. Herath",
+    contribution: "Training, Experiment Design, Manuscript Writing", // TODO(content): confirm wording
+    tldr: "A vanilla Siamese ViT³ test-time-training encoder with the ChangeFormer decoder; on LEVIR-CD+ it reaches 80.61±0.90 F1 against 78.84±0.21 for a matched ChangeFormer control, but does not transfer zero-shot to other datasets and is slower at small inputs.",
+    links: [
+      ["Paper", "https://arxiv.org/abs/2610.15813"],
+      ["PDF", "https://arxiv.org/pdf/2610.15813"],
+      ["DOI", "https://doi.org/10.48550/arXiv.2610.15813"],
+    ],
+  },
+  {
     slug: "igarss26-vssm-benchmark",
     year: 2026,
     area: "remote-sensing",
@@ -131,6 +149,7 @@ export const manuscripts = [
 ];
 
 export const news = [
+  { date: "2026-10", text: "Preprint on arXiv: ChangeT³, evaluating vision test-time training for remote-sensing change detection.", href: "/publications#arxiv26-changet3" },
   { date: "2026-09", text: "Two MERCon 2026 papers published on IEEE Xplore: MambaRefine-CD and the solar-irradiance visual-backbone benchmark.", href: "/publications" },
   { date: "2026-08", text: "Presented two papers at MERCon 2026, the Moratuwa Engineering Research Conference.", href: "/gallery#mercon-2026" }, // TODO(content): confirm wording
   { date: "2026-08", text: "IGARSS 2026 in Washington, D.C.: poster on visual state-space backbones for remote-sensing segmentation.", href: "/gallery#igarss-2026" }, // TODO(content): confirm month
